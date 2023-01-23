@@ -7,7 +7,7 @@ export type GetKeysOfType<
   [Key in keyof Obj as Obj[Key] extends Type ? Key : never]: Obj[Key];
 };
 
-export type TypingProps = {
+export interface TypingProps {
   /**
    *  Array of texts to be typed in order
    */
@@ -36,7 +36,7 @@ export type TypingProps = {
    */
 
   variant?: TypographyProps['variant'];
-};
+}
 
 export type TypingSpanProps = Omit<TypographyProps, 'color'> & {
   color: Exclude<TypingProps['color'], undefined>;
