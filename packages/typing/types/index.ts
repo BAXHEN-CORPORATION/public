@@ -25,6 +25,17 @@ export interface TypingProps {
    *  Colors option from the theme palette
    */
   color?: GetKeysOfType<PaletteColor, Palette>;
+
+  /**
+   * Applies the theme typography styles.
+
+    @default
+    
+    'body1' 
+
+   */
+
+  variant?: TypographyProps['variant'];
 }
 
 export type TypingSpanProps = Omit<TypographyProps, 'color'> & {

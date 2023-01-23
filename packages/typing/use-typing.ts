@@ -1,11 +1,12 @@
-import React from "react";
-import { TypingProps } from "./types";
+import React from 'react';
+import { TypingProps } from './types';
 
 export const useTyping = ({
   texts,
   infinite = false,
   speed = 500,
-  color = "primary",
+  color = 'primary',
+  variant,
 }: TypingProps) => {
   const [index, setIndex] = React.useState(0);
   const [wordIndex, setWordIndex] = React.useState(1);
@@ -48,5 +49,5 @@ export const useTyping = ({
     }, speed);
   }, [index, wordIndex, text]);
 
-  return { text: displayText, color };
+  return { text: displayText, color, variant };
 };

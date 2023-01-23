@@ -10,16 +10,15 @@
 
 {
     "typing": {
-        "scope": "",
-        "version": "",
-        "defaultScope": "baxhen.public",
+        "scope": "baxhen.public",
+        "version": "0.0.1",
         "mainFile": "index.ts",
         "rootDir": "packages/typing",
-        "config": {
-            "teambit.react/react": {},
-            "teambit.envs/envs": {
-                "env": "teambit.react/react"
-            }
+        "nextVersion": {
+            "version": "patch",
+            "message": "feat: add variant to typing component",
+            "username": "beraby",
+            "email": "reboucas.beraby@gmail.com"
         }
     },
     "$schema-version": "15.0.0"

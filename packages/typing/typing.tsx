@@ -26,11 +26,13 @@ const TypingRoot = styled(Typography)({
 });
 
 export const Typing: React.FC<TypingProps> = (props) => {
-  const { text, color } = useTyping(props);
+  const { text, color, variant } = useTyping(props);
 
   return (
     <TypingRoot>
-      <TypingSpan color={color}>{text}</TypingSpan>
+      <TypingSpan variant={variant} color={color}>
+        {text}
+      </TypingSpan>
     </TypingRoot>
   );
 };
