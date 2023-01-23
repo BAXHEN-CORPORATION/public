@@ -2,13 +2,20 @@ import React from 'react';
 
 import { Typing } from './typing';
 
-import { SPEED, texts } from './test-data';
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
-const Wrapper = ({ children }: any) => {
+import { SPEED, texts } from './test-data';
+import { ReactNode } from 'react';
+
+interface WrapperProps {
+  children: ReactNode;
+}
+
+const Wrapper = ({ children }: WrapperProps) => {
   return (
     <Box width="17rem" textAlign="center">
-      {children}
+      <Typography>I am a {children}</Typography>
     </Box>
   );
 };

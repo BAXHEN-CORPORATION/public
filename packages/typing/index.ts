@@ -1,2 +1,2 @@
-export { default } from "./typing";
-export type { TypingProps } from "./types";
+export { Typing } from './typing';
+export type { TypingProps } from './types';

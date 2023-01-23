@@ -1,8 +1,10 @@
 ---
 description: A Typing component using Material UI v5.
+labels: ['Material UI v5', 'React', 'MUI 5']
 ---
 
 import { Typing } from './typing';
+import Typography from '@mui/material/Typography';
 
 A component that simulates typing of texts passed as props.
 
@@ -15,5 +17,13 @@ A component that simulates typing of texts passed as props.
 ### Simple example!
 
 ```js live
-<Typing texts={['Youtuber', 'Designer', 'Programmer']} infinite />
+<Typography variant="h3">
+  I am a
+  <Typing
+    texts={['Youtuber', 'Designer', 'Programmer']}
+    infinite
+    speed={300}
+    variant="h3"
+  />
+</Typography>
 ```
