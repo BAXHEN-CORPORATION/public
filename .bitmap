@@ -11,15 +11,9 @@
 {
     "typing": {
         "scope": "baxhen.public",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "mainFile": "index.ts",
-        "rootDir": "packages/typing",
-        "nextVersion": {
-            "version": "patch",
-            "message": "chore: improve docs to typing component",
-            "username": "beraby",
-            "email": "reboucas.beraby@gmail.com"
-        }
+        "rootDir": "packages/typing"
     },
     "$schema-version": "15.0.0"
 }
