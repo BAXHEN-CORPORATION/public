@@ -1,21 +1,19 @@
-import { ThemeWithProps } from '@mui/material';
-import { useThemeProps } from '@mui/material';
 import React from 'react';
+
+import { useTheme } from '@mui/material';
+
 import { TypingProps } from './types';
 
-export const useTyping = (props: TypingProps) => {
-  const defaultProps = useThemeProps<ThemeWithProps, TypingProps, 'BaxTyping'>({
-    props: { texts: [], speed: 500, color: 'primary' },
-    name: 'BaxTyping',
-  });
+export const useTyping = (inProps: TypingProps) => {
+  const theme = useTheme();
+  const props: TypingProps = {
+    infinite: false,
+    speed: 500,
+    ...theme.components?.BaxTyping?.defaultProps,
+    ...inProps,
+  };
 
-  const {
-    texts,
-    infinite = defaultProps.infinite,
-    speed = defaultProps.speed,
-    color = defaultProps.color,
-    variant = defaultProps.variant,
-  } = props;
+  const { texts, infinite, speed, color, variant } = props;
 
   const [index, setIndex] = React.useState(0);
   const [wordIndex, setWordIndex] = React.useState(1);

@@ -46,7 +46,7 @@ export interface TypingProps {
 }
 
 export type TypingSpanProps = Omit<TypographyProps, 'color'> & {
-  color: Exclude<TypingProps['color'], undefined>;
+  color: TypingProps['color'];
 };
 
 export type TypingClassKey = keyof TypingClasses;

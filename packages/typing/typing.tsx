@@ -8,7 +8,7 @@ import { TypingProps, TypingSpanProps } from './types';
 
 const TypingSpan = styled((props: TypingSpanProps) => (
   <Typography component="span" {...props} />
-))(({ theme, color }) => ({
+))(({ theme, color = 'primary' }) => ({
   color: theme.palette[color].main,
   '&::after': {
     content: "''",
