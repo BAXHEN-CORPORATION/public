@@ -1,4 +1,11 @@
-import type { Palette, PaletteColor, TypographyProps } from '@mui/material';
+import type {
+  ComponentsOverrides,
+  ComponentsProps,
+  ComponentsVariants,
+  Palette,
+  PaletteColor,
+  TypographyProps,
+} from '@mui/material';
 
 export type GetKeysOfType<
   Type extends Record<string, any>,
@@ -41,3 +48,20 @@ export interface TypingProps {
 export type TypingSpanProps = Omit<TypographyProps, 'color'> & {
   color: Exclude<TypingProps['color'], undefined>;
 };
+
+export interface TypingComponent<Theme> {
+  MuiTyping?: {
+    defaultProps?: ComponentsProps['BaxTyping'];
+    styleOverrides?: ComponentsOverrides<Theme>['BaxTyping'];
+    variants?: ComponentsVariants['BaxTyping'];
+  };
+}
+
+export type TypingClassKey = keyof TypingClasses;
+export interface TypingClasses {
+  /** Styles applied to the root element. */
+  root: string;
+
+  /** Styles applied the span element. */
+  span: string;
+}
