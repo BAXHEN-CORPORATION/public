@@ -63,5 +63,5 @@ export interface TypingComponentsPropsList {
 }
 
 export interface TypingComponentNameToClassKey {
-  BaxTyping: 'BaxTyping';
+  BaxTyping: 'TypingClassKey';
 }
