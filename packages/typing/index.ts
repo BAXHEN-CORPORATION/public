@@ -1,2 +1,8 @@
 export { Typing } from './typing';
-export type { TypingProps } from './types';
+export type {
+  TypingClassKey,
+  TypingClasses,
+  TypingComponentNameToClassKey,
+  TypingComponentsPropsList,
+  TypingProps,
+} from './types';

@@ -62,6 +62,14 @@ export interface TypingClasses {
   /** Styles applied to the root element. */
   root: string;
 
-  /** Styles applied the span element. */
+  /** Styles applied to the span element. */
   span: string;
+}
+
+export interface TypingComponentsPropsList {
+  BaxTyping: TypingProps;
+}
+
+export interface TypingComponentNameToClassKey {
+  BaxTyping: 'BaxTyping';
 }
