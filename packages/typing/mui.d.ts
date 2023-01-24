@@ -16,7 +16,7 @@ declare module '@mui/material' {
     BaxTyping: 'BaxTyping';
   }
   interface Components<Theme = unknown> {
-    MuiTyping?: {
+    BaxTyping?: {
       defaultProps?: ComponentsProps['BaxTyping'];
       styleOverrides?: ComponentsOverrides<Theme>['BaxTyping'];
       variants?: ComponentsVariants['BaxTyping'];
