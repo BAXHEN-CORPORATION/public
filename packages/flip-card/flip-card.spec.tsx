@@ -11,7 +11,7 @@ it('should render with the passed title', () => {
 
   expect(rendered).toBeTruthy();
 });
-it.todo('should render with the passed icon', () => {
+it('should render with the passed icon', () => {
   const { getByTestId } = render(<BasicFlipCard />);
 
   const rendered = getByTestId(iconDataTestId);

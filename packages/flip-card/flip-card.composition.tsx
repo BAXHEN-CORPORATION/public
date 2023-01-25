@@ -3,5 +3,7 @@ import { FlipCard } from './flip-card';
 import { Icon, iconDataTestId, title } from './test-data';
 
 export const BasicFlipCard = () => {
-  return <FlipCard title={title} icon={<Icon data-testid={iconDataTestId}/>;
+  return (
+    <FlipCard title={title} icon={<Icon data-testid={iconDataTestId} />} />
+  );
 };
