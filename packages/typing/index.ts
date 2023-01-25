@@ -1,2 +1,2 @@
 export { Typing } from './typing';
-export type { TypingProps } from './types';
+export type { TypingProps } from './typing';

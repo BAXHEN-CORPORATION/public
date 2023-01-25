@@ -9,6 +9,19 @@
  */
 
 {
+    "flip-card": {
+        "scope": "",
+        "version": "",
+        "defaultScope": "baxhen.public",
+        "mainFile": "index.ts",
+        "rootDir": "packages/flip-card",
+        "config": {
+            "teambit.react/react": {},
+            "teambit.envs/envs": {
+                "env": "teambit.react/react"
+            }
+        }
+    },
     "typing": {
         "scope": "baxhen.public",
         "version": "0.0.16",

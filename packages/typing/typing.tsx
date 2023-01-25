@@ -1,10 +1,41 @@
 import React from 'react';
 
-import { styled } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import { Palette, PaletteColor, styled } from '@mui/material';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 
 import { useTyping } from './use-typing';
-import { TypingProps, TypingSpanProps } from './types';
+import { GetKeysOfType, TypingSpanProps } from './types';
+
+export interface TypingProps {
+  /**
+   *  Array of texts to be typed in order
+   */
+  texts: string[];
+  /**
+   *  Speed of typing
+   */
+  speed?: number;
+  /**
+   *  If true, will repeat the process of typing indefinitely
+   */
+  infinite?: boolean;
+
+  /**
+   *  Colors option from the theme palette
+   */
+  color?: GetKeysOfType<PaletteColor, Palette>;
+
+  /**
+   * Applies the theme typography styles.
+
+    @default
+
+    'body1' 
+
+   */
+
+  variant?: TypographyProps['variant'];
+}
 
 const TypingSpan = styled((props: TypingSpanProps) => (
   <Typography component="span" {...props} />

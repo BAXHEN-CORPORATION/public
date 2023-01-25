@@ -5,7 +5,7 @@ import {
   ComponentsVariants,
 } from '@mui/material';
 
-import { TypingProps } from './types';
+import { TypingProps } from './typing';
 
 declare module '@mui/material' {
   interface ComponentsPropsList {

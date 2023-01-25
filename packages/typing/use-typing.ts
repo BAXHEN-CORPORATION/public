@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { useTheme } from '@mui/material';
-
-import { TypingProps } from './types';
+import { TypingProps } from './typing';
 
 export const useTyping = (inProps: TypingProps) => {
   const theme = useTheme();

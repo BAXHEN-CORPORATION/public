@@ -39,7 +39,9 @@
     "packageManager": "teambit.dependencies/pnpm",
     "policy": {
       "dependencies": {
+        "@mui/icons-material": "5.11.0",
         "@teambit/eslint-config-bit-react": "~0.0.367",
+        "@testing-library/react": "12.1.2",
         "@typescript-eslint/eslint-plugin": "4.29.3",
         "eslint-import-resolver-node": "0.3.6",
         "eslint-plugin-import": "2.22.1",
