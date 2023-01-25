@@ -41,6 +41,7 @@ const FlipCardTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
   textTransform: 'uppercase',
   fontSize: '1rem',
+  cursor: 'default',
   '&::after': {
     content: '""',
     display: 'block',
@@ -56,6 +57,17 @@ const FlipCardIconContainer = styled(Box)(({ theme }) => ({
     fill: theme.palette.primary.main,
   },
 }));
+const FlipCardLabelContainer = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+});
+const FlipCardLabel = styled(Typography)(({ theme }) => ({
+  fontSize: '10px',
+  color: theme.palette.primary.main,
+  textTransform: 'uppercase',
+  cursor: 'default',
+}));
 export function FlipCard({ title, icon, flipLabel = 'more' }: FlipCardProps) {
   return (
     <FlipCardRoot>
@@ -63,16 +75,10 @@ export function FlipCard({ title, icon, flipLabel = 'more' }: FlipCardProps) {
         <FlipCardFront>
           <FlipCardIconContainer>{icon}</FlipCardIconContainer>
           <FlipCardTitle>{title}</FlipCardTitle>
-          <Box>
-            <Typography
-              fontSize="10px"
-              color="primary"
-              textTransform="uppercase"
-            >
-              {flipLabel}
-            </Typography>{' '}
+          <FlipCardLabelContainer>
+            <FlipCardLabel>{flipLabel}</FlipCardLabel>{' '}
             <FlipIcon color="primary" />
-          </Box>
+          </FlipCardLabelContainer>
         </FlipCardFront>
         <FlipCardBack></FlipCardBack>
       </FlipCardContainer>
