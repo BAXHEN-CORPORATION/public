@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import {
   title,
@@ -48,5 +48,13 @@ it('should render with the custom flip label', () => {
 
   expect(rendered).toBeTruthy();
 });
-it.todo('should flip and not show the front content on hover and focus state');
+it('should flip and not show the front content on hover and focus state', () => {
+  const { getByText } = render(<BasicFlipCard />);
+
+  const rendered = getByText(title);
+
+  fireEvent.mouseOver(rendered);
+
+  expect(rendered).not.toBeTruthy();
+});
 it.todo('should show the back content on hover and focus state');
