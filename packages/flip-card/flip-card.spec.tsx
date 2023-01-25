@@ -9,7 +9,7 @@ import {
   defaultFlipLabel,
   customFlipLabel,
   details,
-} from './test-data';
+} from './test';
 import {
   BasicFlipCard,
   CustomMoreLabelFlipCard,

@@ -1,20 +1,26 @@
 ---
 description: A FlipCard component.
-labels: ['Material UI v5', 'React', 'MUI 5']
+labels: ["Material UI v5", "React", "MUI 5"]
 ---
 
-import { FlipCard } from './flip-card';
+import { FlipCard } from "./flip-card";
 
-A component that does something special and renders text in a div.
+import { Icon, details, title } from "./test";
+
+A card component that flips show the title and an icon at front and the details at back.
 
 ### Component usage
 
 ```js
-<FlipCard>Hello world!</FlipCard>
+<FlipCard title={title} icon={<Icon />} details={details} />
 ```
 
-### Render hello world!
+### Live Playground!
 
 ```js live
-<FlipCard>Hello world!</FlipCard>
+<FlipCard
+  title="business investment"
+  icon={<Icon />}
+  details="Contribute a minimum investment of €1 million to an Irish company or business."
+/>
 ```
