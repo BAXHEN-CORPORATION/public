@@ -1,6 +1,6 @@
-import MonetizationOn from '@mui/icons-material/MonetizationOn';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 
 export const title = 'Business investment';
-export const Icon = MonetizationOn;
-export const iconDataTestId = 'MonetizationOnIcon';
+export const Icon = AddBusinessIcon;
+export const iconDataTestId = 'AddBusinessIconIcon';
 export const flipIconDataTestId = 'FlipIcon';
