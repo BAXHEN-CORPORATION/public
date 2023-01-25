@@ -24,7 +24,7 @@
     },
     "typing": {
         "scope": "baxhen.public",
-        "version": "0.0.16",
+        "version": "0.0.17",
         "mainFile": "index.ts",
         "rootDir": "packages/typing"
     },
