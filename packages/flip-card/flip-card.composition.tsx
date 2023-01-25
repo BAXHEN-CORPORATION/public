@@ -18,7 +18,7 @@ export const CustomMoreLabelFlipCard = () => {
       <FlipCard
         title={title}
         icon={<Icon data-testid={iconDataTestId} />}
-        moreLabel={customFlipLabel}
+        flipLabel={customFlipLabel}
       />
     </Box>
   );
