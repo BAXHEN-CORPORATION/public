@@ -62,7 +62,16 @@ export function FlipCard({ title, icon }: FlipCardProps) {
         <FlipCardFront>
           <FlipCardIconContainer>{icon}</FlipCardIconContainer>
           <FlipCardTitle>{title}</FlipCardTitle>
-          <FlipIcon color="primary" />
+          <Box>
+            <Typography
+              fontSize="10px"
+              color="primary"
+              textTransform="uppercase"
+            >
+              more
+            </Typography>{' '}
+            <FlipIcon color="primary" />
+          </Box>
         </FlipCardFront>
         <FlipCardBack></FlipCardBack>
       </FlipCardContainer>
