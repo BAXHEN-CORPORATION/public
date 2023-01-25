@@ -5,3 +5,4 @@ export const Icon = AddBusinessIcon;
 export const iconDataTestId = 'AddBusinessIconIcon';
 export const flipIconDataTestId = 'FlipIcon';
 export const defaultFlipLabel = 'more';
+export const customFlipLabel = 'mais';

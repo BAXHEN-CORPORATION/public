@@ -6,8 +6,12 @@ import {
   iconDataTestId,
   flipIconDataTestId,
   defaultFlipLabel,
+  customFlipLabel,
 } from './test-data';
-import { BasicFlipCard } from './flip-card.composition';
+import {
+  BasicFlipCard,
+  CustomMoreLabelFlipCard,
+} from './flip-card.composition';
 
 it('should render with the passed title', () => {
   const { getByText } = render(<BasicFlipCard />);
@@ -37,6 +41,12 @@ it('should render with the default flip label', () => {
 
   expect(rendered).toBeTruthy();
 });
-it.todo('should render with the custom flip label');
+it('should render with the custom flip label', () => {
+  const { getByText } = render(<CustomMoreLabelFlipCard />);
+
+  const rendered = getByText(customFlipLabel);
+
+  expect(rendered).toBeTruthy();
+});
 it.todo('should flip and not show the front content on hover and focus state');
 it.todo('should show the back content on hover and focus state');
