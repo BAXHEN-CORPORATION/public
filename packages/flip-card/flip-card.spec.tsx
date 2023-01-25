@@ -8,7 +8,7 @@ import {
   flipIconDataTestId,
   defaultFlipLabel,
   customFlipLabel,
-  backContent,
+  details,
 } from './test-data';
 import {
   BasicFlipCard,
@@ -54,7 +54,7 @@ it('should render with the custom flip label', () => {
 it('should render with the back content', () => {
   const { getByText } = render(<BasicFlipCard />);
 
-  const rendered = getByText(backContent);
+  const rendered = getByText(details);
 
   expect(rendered).toBeTruthy();
 });

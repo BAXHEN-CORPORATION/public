@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import FlipIcon from '@mui/icons-material/Flip';
 export interface FlipCardProps {
   title: string;
+  details: string;
   flipLabel?: string;
   icon: JSX.Element;
 }
@@ -82,7 +83,13 @@ const FlipCardLabel = styled(Typography)(({ theme }) => ({
   textTransform: 'uppercase',
   cursor: 'default',
 }));
-export function FlipCard({ title, icon, flipLabel = 'more' }: FlipCardProps) {
+
+export function FlipCard({
+  title,
+  icon,
+  flipLabel = 'more',
+  details,
+}: FlipCardProps) {
   return (
     <FlipCardRoot>
       <FlipCardContainer data-testid="flip-card-container">
@@ -94,7 +101,9 @@ export function FlipCard({ title, icon, flipLabel = 'more' }: FlipCardProps) {
             <FlipIcon color="primary" />
           </FlipCardLabelContainer>
         </FlipCardFront>
-        <FlipCardBack></FlipCardBack>
+        <FlipCardBack>
+          <Typography>{details}</Typography>
+        </FlipCardBack>
       </FlipCardContainer>
     </FlipCardRoot>
   );
