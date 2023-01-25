@@ -1,5 +1,6 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import {
   title,
@@ -7,6 +8,7 @@ import {
   flipIconDataTestId,
   defaultFlipLabel,
   customFlipLabel,
+  backContent,
 } from './test-data';
 import {
   BasicFlipCard,
@@ -48,13 +50,11 @@ it('should render with the custom flip label', () => {
 
   expect(rendered).toBeTruthy();
 });
-it('should flip and not show the front content on hover and focus state', () => {
+
+it('should render with the back content', () => {
   const { getByText } = render(<BasicFlipCard />);
 
-  const rendered = getByText(title);
+  const rendered = getByText(backContent);
 
-  fireEvent.mouseOver(rendered);
-
-  expect(rendered).not.toBeTruthy();
+  expect(rendered).toBeTruthy();
 });
-it.todo('should show the back content on hover and focus state');

@@ -15,6 +15,10 @@ const FlipCardRoot = styled(Box)({
   height: '250px',
   perspective: '1000px',
   borderRadius: '20px',
+
+  '&:hover > div': {
+    transform: 'rotateY(180deg)',
+  },
 });
 const FlipCardContainer = styled(Box)({
   position: 'relative',
@@ -36,6 +40,7 @@ const FlipCardFront = styled(Box)(({ theme }) => ({
   borderRadius: '20px',
   border: `1px solid ${theme.palette.primary.main}`,
   padding: '20px',
+  backfaceVisibility: 'hidden',
 }));
 const FlipCardTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -50,7 +55,16 @@ const FlipCardTitle = styled(Typography)(({ theme }) => ({
     margin: '20px auto',
   },
 }));
-const FlipCardBack = styled(Box)({});
+
+const FlipCardBack = styled(Box)({
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+  backfaceVisibility: 'hidden',
+  transform: 'rotateY(180deg)',
+  backgroundColor: 'red',
+});
+
 const FlipCardIconContainer = styled(Box)(({ theme }) => ({
   '& > svg': {
     fontSize: '5rem',
@@ -71,8 +85,8 @@ const FlipCardLabel = styled(Typography)(({ theme }) => ({
 export function FlipCard({ title, icon, flipLabel = 'more' }: FlipCardProps) {
   return (
     <FlipCardRoot>
-      <FlipCardContainer>
-        <FlipCardFront>
+      <FlipCardContainer data-testid="flip-card-container">
+        <FlipCardFront data-testid="flip-card-front">
           <FlipCardIconContainer>{icon}</FlipCardIconContainer>
           <FlipCardTitle>{title}</FlipCardTitle>
           <FlipCardLabelContainer>
