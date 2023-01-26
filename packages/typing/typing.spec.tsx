@@ -1,9 +1,9 @@
-import React from 'react';
-import { act, render, screen } from '@testing-library/react';
-import { Typing } from './typing';
-import { SPEED, texts } from './test-data';
+import React from "react";
+import { act, render, screen } from "@testing-library/react";
+import { Typing } from "./typing";
+import { SPEED, texts } from "./test";
 
-test('if it render the letters of the texts in order according each speed time', async () => {
+test("if it render the letters of the texts in order according each speed time", async () => {
   jest.useFakeTimers();
   render(<Typing texts={texts} speed={SPEED} />);
 
@@ -18,7 +18,7 @@ test('if it render the letters of the texts in order according each speed time',
   }
 });
 
-test('if it types each only once by default and display the last one in the end', async () => {
+test("if it types each only once by default and display the last one in the end", async () => {
   jest.useFakeTimers();
   render(<Typing texts={texts} speed={SPEED} />);
 
@@ -36,7 +36,7 @@ test('if it types each only once by default and display the last one in the end'
   expect(spanElement).toBeInTheDocument();
 });
 
-test('if it types texts on loop when infinite props is passed', async () => {
+test("if it types texts on loop when infinite props is passed", async () => {
   jest.useFakeTimers();
   render(<Typing texts={texts} speed={SPEED} infinite />);
 

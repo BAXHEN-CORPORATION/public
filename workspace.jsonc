@@ -1,7 +1,7 @@
 /**
  * this is the main configuration file of your bit workspace.
  * for full documentation, please see: https://bit.dev/docs/workspace/workspace-configuration
- **/ {
+ **/{
   "$schema": "https://static.bit.dev/teambit/schemas/schema.json",
   /**
    * main configuration of the Bit workspace.
@@ -39,8 +39,10 @@
     "packageManager": "teambit.dependencies/pnpm",
     "policy": {
       "dependencies": {
+        "@emotion/jest": "11.10.5",
         "@mui/icons-material": "5.11.0",
         "@teambit/eslint-config-bit-react": "~0.0.367",
+        "@testing-library/jest-dom": "5.16.5",
         "@testing-library/react": "12.1.2",
         "@testing-library/user-event": "14.4.3",
         "@typescript-eslint/eslint-plugin": "4.29.3",
@@ -71,7 +73,9 @@
   "teambit.workspace/variants": {
     "./packages": {
       "teambit.component/dev-files": {
-        "devFilePatterns": ["test/*.+(js|ts|jsx|tsx)"]
+        "devFilePatterns": [
+          "test/*.+(js|ts|jsx|tsx)"
+        ]
       }
     }
   }

@@ -1,25 +1,19 @@
-import '@mui/material';
-import {
-  ComponentsOverrides,
-  ComponentsProps,
-  ComponentsVariants,
-} from '@mui/material';
+import "@mui/material";
+import { ComponentsProps } from "@mui/material";
 
-import { TypingProps } from './typing';
+import { TypingProps } from "./typing";
 
-declare module '@mui/material' {
+declare module "@mui/material" {
   interface ComponentsPropsList {
     BaxTyping: TypingProps;
   }
 
   interface ComponentNameToClassKey {
-    BaxTyping: 'BaxTyping';
+    BaxTyping: "BaxTyping";
   }
   interface Components<Theme = unknown> {
     BaxTyping?: {
-      defaultProps?: ComponentsProps['BaxTyping'];
-      styleOverrides?: ComponentsOverrides<Theme>['BaxTyping'];
-      variants?: ComponentsVariants['BaxTyping'];
+      defaultProps?: ComponentsProps["BaxTyping"];
     };
   }
 }

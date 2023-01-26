@@ -1,26 +1,19 @@
-import React from "react";
-import {
-  screen,
-  render,
-  act,
-  fireEvent,
-  waitFor,
-} from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { matchers } from "@emotion/jest";
+import { render, screen } from "@testing-library/react";
+import React from "react";
 
-import {
-  title,
-  iconDataTestId,
-  flipIconDataTestId,
-  defaultFlipLabel,
-  customFlipLabel,
-  details,
-} from "./test";
 import {
   BasicFlipCard,
   CustomMoreLabelFlipCard,
 } from "./flip-card.composition";
+import {
+  customFlipLabel,
+  defaultFlipLabel,
+  details,
+  flipIconDataTestId,
+  iconDataTestId,
+  title,
+} from "./test";
 
 expect.extend(matchers);
 
@@ -102,4 +95,11 @@ describe("<FlipCard />", () => {
 
     expect(rendered).not.toHaveStyleRule("transform", "rotateY(180deg)");
   });
+
+  it.todo("should render with primary color and respective contrast color");
+  it.todo("should render with secondary color and respective contrast color");
+  it.todo("should render with error color and respective contrast color");
+  it.todo("should render with success color and respective contrast color");
+  it.todo("should render with warning color and respective contrast color");
+  it.todo("should render with info color and respective contrast color");
 });

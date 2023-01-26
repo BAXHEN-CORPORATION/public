@@ -1,11 +1,11 @@
-import React from 'react';
-import type { ReactNode } from 'react';
+import React from "react";
+import type { ReactNode } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { Typing } from './typing';
-import { SPEED, texts } from './test-data';
+import { Typing } from "./typing";
+import { SPEED, texts } from "./test";
 
 interface WrapperProps {
   children: ReactNode;
