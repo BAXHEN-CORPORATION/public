@@ -16,10 +16,6 @@ const FlipCardRoot = styled(Box)({
   height: "250px",
   perspective: "1000px",
   borderRadius: "20px",
-
-  "&:hover > div": {
-    transform: "rotateY(180deg)",
-  },
 });
 const FlipCardContainer = styled(Box)({
   position: "relative",
@@ -30,6 +26,9 @@ const FlipCardContainer = styled(Box)({
   transition: "transform 0.6s",
   transformStyle: "preserve-3d",
   borderRadius: "20px",
+  "&:hover, &:focus ": {
+    transform: "rotateY(180deg)",
+  },
 });
 const FlipCardFront = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -113,7 +112,7 @@ export function FlipCard({
             <FlipIcon color="primary" />
           </FlipCardLabelContainer>
         </FlipCardFront>
-        <FlipCardBack>
+        <FlipCardBack data-testid="flip-card-back">
           <FlipCardDetails>{details}</FlipCardDetails>
         </FlipCardBack>
       </FlipCardContainer>
