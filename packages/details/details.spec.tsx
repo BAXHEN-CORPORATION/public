@@ -22,4 +22,12 @@ it("should show the content if the title is clicked", () => {
   const rendered = screen.queryByText(content);
   expect(rendered).toBeVisible();
 });
-it.todo("should hide the content if the title is clicked twice");
+it("should hide the content if the title is clicked twice", () => {
+  const { getByText } = render(<BasicDetails />);
+  const renderedTitle = getByText(title);
+  renderedTitle.click();
+  renderedTitle.click();
+
+  const rendered = screen.queryByText(content);
+  expect(rendered).not.toBeVisible();
+});
