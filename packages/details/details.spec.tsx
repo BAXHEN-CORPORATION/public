@@ -10,9 +10,9 @@ it("should render with the correct summary text", () => {
 });
 
 it("should not show the content if the title is not clicked", () => {
-  const { getByText } = render(<BasicDetails />);
-  const rendered = getByText(content);
-  expect(rendered).toBeTruthy();
+  const { getByRole } = render(<BasicDetails />);
+  const rendered = getByRole("paragraph");
+  expect(rendered.innerHTML).not.toBeTruthy();
 });
 it.todo("should show the content if the title is clicked");
 it.todo("should hide the content if the title is clicked twice");
