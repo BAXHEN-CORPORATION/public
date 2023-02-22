@@ -14,5 +14,12 @@ it("should not show the content if the title is not clicked", () => {
   const rendered = screen.queryByText(content);
   expect(rendered).not.toBeVisible();
 });
-it.todo("should show the content if the title is clicked");
+it("should show the content if the title is clicked", () => {
+  const { getByText } = render(<BasicDetails />);
+  const renderedTitle = getByText(title);
+  renderedTitle.click();
+
+  const rendered = screen.queryByText("ss");
+  expect(rendered).toBeVisible();
+});
 it.todo("should hide the content if the title is clicked twice");
