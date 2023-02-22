@@ -2,16 +2,21 @@ import React, { ReactNode } from "react";
 
 export interface DetailsProps {
   /**
-   * the content to be rendered on the details
+   * the title to be rendered on the summary
    */
 
-  content: string | ReactNode;
+  title: string;
+  // /**
+  //  * the content to be rendered on the details
+  //  */
+
+  // content: string | ReactNode;
 }
 
-export function Details({}: DetailsProps) {
+export function Details({ title }: DetailsProps) {
   return (
     <details>
-      <summary>Details</summary>
+      <summary>{title}</summary>
     </details>
   );
 }
