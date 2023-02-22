@@ -1,9 +1,8 @@
 import React, { ReactNode } from "react";
 
 import { styled } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
 import { useDetails } from "./use-details";
+import { SummaryFocusColor } from "./types";
 export interface DetailsProps {
   /**
    * the title to be rendered on the summary
@@ -15,6 +14,11 @@ export interface DetailsProps {
    */
 
   children: string | ReactNode;
+  /**
+   * the focus color of the summary outline
+   */
+
+  color?: SummaryFocusColor;
 }
 
 const DetailsRoot = styled("details", {
@@ -30,7 +34,12 @@ const DetailsRoot = styled("details", {
   display: "block",
   width: "100%",
 });
-const Summary = styled("summary")(({ theme }) => ({
+
+interface SummaryProps {
+  color: SummaryFocusColor;
+}
+
+const Summary = styled("summary")<SummaryProps>(({ theme, color }) => ({
   listStyle: "none",
   cursor: "pointer",
   padding: "2rem 3rem",
@@ -38,7 +47,7 @@ const Summary = styled("summary")(({ theme }) => ({
   gap: "2rem",
   alignItems: "center",
   "&:focus": {
-    outline: `${theme.palette.primary.main} dotted 3px`,
+    outline: `${theme.palette[color].main} dotted 3px`,
   },
 }));
 const SummaryTitle = styled("span")(({ theme }) => ({
@@ -64,11 +73,11 @@ const ContentText = styled("p")(({ theme }) => ({
 }));
 
 export function Details(props: DetailsProps) {
-  const { title, children, open, Icon, ref } = useDetails(props);
+  const { title, children, open, Icon, ref, color } = useDetails(props);
 
   return (
     <DetailsRoot open={open} ref={ref}>
-      <Summary>
+      <Summary color={color}>
         <SummaryTitle>{title}</SummaryTitle>
         <Icon fontSize="medium" />
       </Summary>

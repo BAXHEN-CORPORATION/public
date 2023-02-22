@@ -47,5 +47,12 @@ export const useDetails = (inProps: DetailsProps) => {
     return () => observer.disconnect();
   }, [setOpen]);
 
-  return { ...inProps, open, onOpenToggle, Icon, ref };
+  return {
+    color: "primary" as const,
+    ...inProps,
+    open,
+    onOpenToggle,
+    Icon,
+    ref,
+  };
 };

@@ -31,3 +31,16 @@ it("should hide the content if the title is clicked twice", () => {
   const rendered = screen.queryByText(content);
   expect(rendered).not.toBeVisible();
 });
+
+it.todo(
+  "should have a primary a color prop from the theme palette to change focus color"
+);
+it.todo(
+  "should have a secondary a color prop from the theme palette to change focus color"
+);
+
+it.todo("should receive styles from the theme for the DetailsRoot component");
+it.todo("should receive styles from the theme for the Summary component");
+it.todo("should receive styles from the theme for the SummaryTitle component");
+it.todo("should receive styles from the theme for the Content component");
+it.todo("should receive styles from the theme for the ContentText component");
