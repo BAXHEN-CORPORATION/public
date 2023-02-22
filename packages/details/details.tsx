@@ -6,17 +6,18 @@ export interface DetailsProps {
    */
 
   title: string;
-  // /**
-  //  * the content to be rendered on the details
-  //  */
+  /**
+   * the content to be rendered on the details
+   */
 
-  // content: string | ReactNode;
+  children: string | ReactNode;
 }
 
-export function Details({ title }: DetailsProps) {
+export function Details({ title, children }: DetailsProps) {
   return (
     <details>
       <summary>{title}</summary>
+      <p>{children}</p>
     </details>
   );
 }
