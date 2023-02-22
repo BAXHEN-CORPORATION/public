@@ -10,7 +10,13 @@ export interface FlipCardProps {
   icon: JSX.Element;
 }
 
-const FlipCardRoot = styled(Box)({
+const FlipCardRoot = styled("div", {
+  name: "BaxFlipCard",
+  slot: "Root",
+  overridesResolver: (props, styles) => {
+    return [styles.root];
+  },
+})({
   backgroundColor: "transparent",
   width: "250px",
   height: "250px",
@@ -102,7 +108,7 @@ export function FlipCard({
   details,
 }: FlipCardProps) {
   return (
-    <FlipCardRoot>
+    <FlipCardRoot data-testid="flip-card">
       <FlipCardContainer data-testid="flip-card-container">
         <FlipCardFront data-testid="flip-card-front">
           <FlipCardIconContainer>{icon}</FlipCardIconContainer>

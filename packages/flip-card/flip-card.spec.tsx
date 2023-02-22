@@ -15,6 +15,10 @@ import {
   title,
 } from "./test";
 
+import classes from "./flip-card-classes";
+
+console.log({ classes });
+
 expect.extend(matchers);
 
 describe("<FlipCard />", () => {
@@ -96,6 +100,13 @@ describe("<FlipCard />", () => {
     expect(rendered).not.toHaveStyleRule("transform", "rotateY(180deg)");
   });
 
+  it("should render with the root", () => {
+    render(<BasicFlipCard />);
+
+    const flipCard = screen.getByTestId("flip-card");
+
+    expect(flipCard.className).not.toContain(classes.root);
+  });
   it.todo("should render with primary color and respective contrast color");
   it.todo("should render with secondary color and respective contrast color");
   it.todo("should render with error color and respective contrast color");
