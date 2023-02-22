@@ -19,7 +19,7 @@ it("should show the content if the title is clicked", () => {
   const renderedTitle = getByText(title);
   renderedTitle.click();
 
-  const rendered = screen.queryByText("ss");
+  const rendered = screen.queryByText(content);
   expect(rendered).toBeVisible();
 });
 it.todo("should hide the content if the title is clicked twice");
