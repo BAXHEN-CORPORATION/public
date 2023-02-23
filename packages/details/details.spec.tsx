@@ -128,13 +128,12 @@ it("should receive styles from the theme for the DetailsRoot component", () => {
 });
 
 it("should receive styles from the theme for the Summary component", () => {
-  const { getByTestId } = render(<OverrideDetailsRoot />);
-  const rendered = getByTestId("Details");
+  const { getByText } = render(<OverrideDetailsRoot />);
+  const rendered = getByText(title);
 
   expect(rendered).toHaveStyle(
-    `background-color:${
-      themeOverrides.components!.BaxDetails!.styleOverrides.summary
-        .backgroundColor
+    `color:${
+      themeOverrides.components!.BaxDetails!.styleOverrides.summary.color
     }`
   );
 });

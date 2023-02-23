@@ -13,7 +13,10 @@ export const themeOverrides = createTheme({
   components: {
     BaxDetails: {
       defaultProps: { color: "primary" },
-      styleOverrides: { root: { backgroundColor: "blue" } },
+      styleOverrides: {
+        root: { backgroundColor: "blue" },
+        summary: { color: "green" },
+      },
     },
   },
 });
