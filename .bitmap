@@ -11,52 +11,22 @@
 {
     "details": {
         "scope": "",
-        "version": "",
+        "version": "0.0.1",
         "defaultScope": "baxhen.public",
         "mainFile": "index.ts",
-        "rootDir": "packages/details",
-        "nextVersion": {
-            "version": "patch",
-            "message": "feat: details component",
-            "username": "beraby",
-            "email": "reboucas.beraby@gmail.com"
-        },
-        "config": {
-            "teambit.react/react": {},
-            "teambit.envs/envs": {
-                "env": "teambit.react/react"
-            }
-        }
+        "rootDir": "packages/details"
     },
     "flip-card": {
         "scope": "baxhen.public",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
-        "rootDir": "packages/flip-card",
-        "nextVersion": {
-            "version": "patch",
-            "message": "feat: details component",
-            "username": "beraby",
-            "email": "reboucas.beraby@gmail.com"
-        },
-        "config": {
-            "teambit.react/react": {},
-            "teambit.envs/envs": {
-                "env": "teambit.react/react"
-            }
-        }
+        "rootDir": "packages/flip-card"
     },
     "typing": {
         "scope": "baxhen.public",
-        "version": "0.0.17",
+        "version": "0.0.18",
         "mainFile": "index.ts",
-        "rootDir": "packages/typing",
-        "nextVersion": {
-            "version": "patch",
-            "message": "feat: details component",
-            "username": "beraby",
-            "email": "reboucas.beraby@gmail.com"
-        }
+        "rootDir": "packages/typing"
     },
     "$schema-version": "15.0.0"
 }
