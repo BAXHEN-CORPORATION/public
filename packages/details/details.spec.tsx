@@ -1,7 +1,11 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 
-import { BasicDetails, PrimaryDetails } from "./details.composition";
+import {
+  BasicDetails,
+  PrimaryDetails,
+  SecondaryDetails,
+} from "./details.composition";
 import { content, title } from "./test";
 import detailsClasses from "./details-classes";
 
@@ -46,9 +50,18 @@ it("should render with the root and primary classes but no others", () => {
   expect(rendered).not.toHaveClass(detailsClasses.info);
   expect(rendered).not.toHaveClass(detailsClasses.warning);
 });
-it.todo(
-  "should have a secondary color prop from the theme palette to change summary focus color"
-);
+it("should render with the root and secondary classes but no others", () => {
+  const { getByTestId } = render(<SecondaryDetails />);
+  const rendered = getByTestId("Details");
+
+  expect(rendered).toHaveClass(detailsClasses.root);
+  expect(rendered).not.toHaveClass(detailsClasses.primary);
+  expect(rendered).toHaveClass(detailsClasses.secondary);
+  expect(rendered).not.toHaveClass(detailsClasses.error);
+  expect(rendered).not.toHaveClass(detailsClasses.success);
+  expect(rendered).not.toHaveClass(detailsClasses.info);
+  expect(rendered).not.toHaveClass(detailsClasses.warning);
+});
 
 it.todo("should receive styles from the theme for the DetailsRoot component");
 it.todo("should receive styles from the theme for the Summary component");
