@@ -86,6 +86,18 @@ it("should render with the root and success classes but no others", () => {
   expect(rendered).not.toHaveClass(detailsClasses.info);
   expect(rendered).not.toHaveClass(detailsClasses.warning);
 });
+it("should render with the root and info classes but no others", () => {
+  const { getByTestId } = render(<SecondaryDetails />);
+  const rendered = getByTestId("Details");
+
+  expect(rendered).toHaveClass(detailsClasses.root);
+  expect(rendered).not.toHaveClass(detailsClasses.primary);
+  expect(rendered).not.toHaveClass(detailsClasses.secondary);
+  expect(rendered).not.toHaveClass(detailsClasses.error);
+  expect(rendered).not.toHaveClass(detailsClasses.success);
+  expect(rendered).toHaveClass(detailsClasses.info);
+  expect(rendered).not.toHaveClass(detailsClasses.warning);
+});
 
 it.todo("should receive styles from the theme for the DetailsRoot component");
 it.todo("should receive styles from the theme for the Summary component");
