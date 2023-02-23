@@ -11,7 +11,7 @@ import {
   SuccessDetails,
   WarningDetails,
 } from "./details.composition";
-import { content, theme, themeOverrides, title } from "./test";
+import { content, themeOverrides, title } from "./test";
 import detailsClasses from "./details-classes";
 
 it("should render with the correct summary text", () => {
@@ -128,8 +128,8 @@ it("should receive styles from the theme for the DetailsRoot component", () => {
 });
 
 it("should receive styles from the theme for the Summary component", () => {
-  const { getByText } = render(<OverrideDetailsRoot />);
-  const rendered = getByText(title);
+  const { getByTestId } = render(<OverrideDetailsRoot />);
+  const rendered = getByTestId("Summary");
 
   expect(rendered).toHaveStyle(
     `color:${

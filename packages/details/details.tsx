@@ -36,7 +36,7 @@ const useUtilityClasses = (ownerState) => {
 
   const slots = {
     root: ["root", color],
-    // summary: ["summary"],
+    summary: ["summary"],
   };
 
   return composeClasses(slots, getDetailsUtilityClass, classes);
@@ -46,7 +46,6 @@ const DetailsRoot = styled("details", {
   name: "BaxDetails",
   slot: "Root",
   overridesResolver: (props, styles) => {
-    console.log({ styles, props });
     return [styles.root, styles.primary];
   },
 })(({ theme, ownerState }) => ({
@@ -61,17 +60,18 @@ const DetailsRoot = styled("details", {
   },
 }));
 
-const Summary = styled(
-  "summary",
-  {}
-)(({ theme }) => ({
+const Summary = styled("summary", {
+  name: "BaxDetails",
+  slot: "Summary",
+  overridesResolver: (props, styles) => styles.summary,
+})({
   listStyle: "none",
   cursor: "pointer",
   padding: "2rem 3rem",
   display: "flex",
   gap: "2rem",
   alignItems: "center",
-}));
+});
 
 const SummaryTitle = styled("span")(({ theme }) => ({
   backgroundColor: "transparent",
@@ -122,7 +122,7 @@ export function Details(inProps: DetailsProps) {
       className={clsx(classes.root, className)}
       data-testid="Details"
     >
-      <Summary>
+      <Summary data-testid="Summary" className={classes.summary}>
         <SummaryTitle>{title}</SummaryTitle>
         <Icon fontSize="medium" />
       </Summary>

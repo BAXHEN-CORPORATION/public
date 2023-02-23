@@ -18,6 +18,8 @@ export interface DetailsClasses {
   info: string;
   /** Styles applied to the root element if `color="warning"`. */
   warning: string;
+  /** Styles applied to the summary element. */
+  summary: string;
 }
 
 export type DetailsClassKey = keyof DetailsClasses;
@@ -28,7 +30,16 @@ export function getDetailsUtilityClass(slot: string): string {
 
 const detailsClasses: DetailsClasses = generateUtilityClasses(
   "BaxDetails",
-  ["root", "primary", "secondary", "error", "success", "warning", "info"],
+  [
+    "root",
+    "primary",
+    "secondary",
+    "error",
+    "success",
+    "warning",
+    "info",
+    "summary",
+  ],
   "Bax"
 );
 
