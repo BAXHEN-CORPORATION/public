@@ -85,13 +85,17 @@ const SummaryTitle = styled("span", {
   margin: 0,
 });
 
-const Content = styled("div")(({ theme }) => ({
+const ContentWrapper = styled("div", {
+  name: "BaxDetails",
+  slot: "ContentWrapper",
+  overridesResolver: (props, styles) => styles.contentWrapper,
+})({
   backgroundColor: "transparent",
   padding: "2rem 3rem",
   borderTop: "1px solid rgb(219, 229, 230)",
   color: "rgb(115, 115, 115)",
   wordBreak: "break-word",
-}));
+});
 
 const ContentText = styled("p")(({ theme }) => ({
   margin: 0,
@@ -130,9 +134,9 @@ export function Details(inProps: DetailsProps) {
         <SummaryTitle>{title}</SummaryTitle>
         <Icon fontSize="medium" />
       </Summary>
-      <Content>
+      <ContentWrapper data-testid="ContentWrapper">
         <ContentText>{children}</ContentText>
-      </Content>
+      </ContentWrapper>
     </DetailsRoot>
   );
 }

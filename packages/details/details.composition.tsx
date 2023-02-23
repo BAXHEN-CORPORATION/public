@@ -76,7 +76,7 @@ export const WarningDetails = () => {
 export const OverrideDetailsRoot = () => {
   return (
     <WrapperOverrides>
-      <Details title={title}>This a warning color focus state</Details>
+      <Details title={title}>{content}</Details>
     </WrapperOverrides>
   );
 };

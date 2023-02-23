@@ -157,4 +157,13 @@ it("should receive styles from the theme for the ContentWrapper component", () =
     }`
   );
 });
-it.todo("should receive styles from the theme for the ContentText component");
+it("should receive styles from the theme for the ContentText component", () => {
+  const { getByText } = render(<OverrideDetailsRoot />);
+  const rendered = getByText(content);
+
+  expect(rendered).toHaveStyle(
+    `color:${
+      themeOverrides.components!.BaxDetails!.styleOverrides.contentText.color
+    }`
+  );
+});

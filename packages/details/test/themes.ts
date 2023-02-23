@@ -17,6 +17,7 @@ export const themeOverrides = createTheme({
         root: { backgroundColor: "blue" },
         summary: { color: "green" },
         summaryTitle: { color: "green" },
+        contentWrapper: { color: "green" },
       },
     },
   },
