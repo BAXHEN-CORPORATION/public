@@ -1,7 +1,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { BasicDetails } from "./details.composition";
+
+import { BasicDetails, PrimaryDetails } from "./details.composition";
 import { content, title } from "./test";
+import detailsClasses from "./details-classes";
 
 it("should render with the correct summary text", () => {
   const { getByText } = render(<BasicDetails />);
@@ -32,11 +34,20 @@ it("should hide the content if the title is clicked twice", () => {
   expect(rendered).not.toBeVisible();
 });
 
+it("should render with the root and primary classes but no others", () => {
+  const { getByTestId } = render(<PrimaryDetails />);
+  const rendered = getByTestId("Details");
+
+  expect(rendered).toHaveClass(detailsClasses.root);
+  expect(rendered).toHaveClass(detailsClasses.primary);
+  expect(rendered).not.toHaveClass(detailsClasses.secondary);
+  expect(rendered).not.toHaveClass(detailsClasses.error);
+  expect(rendered).not.toHaveClass(detailsClasses.success);
+  expect(rendered).not.toHaveClass(detailsClasses.info);
+  expect(rendered).not.toHaveClass(detailsClasses.warning);
+});
 it.todo(
-  "should have a primary a color prop from the theme palette to change focus color"
-);
-it.todo(
-  "should have a secondary a color prop from the theme palette to change focus color"
+  "should have a secondary color prop from the theme palette to change summary focus color"
 );
 
 it.todo("should receive styles from the theme for the DetailsRoot component");

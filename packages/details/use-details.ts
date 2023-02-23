@@ -6,8 +6,6 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { DetailsProps } from "./details";
 
 export const useDetails = (inProps: DetailsProps) => {
-  const theme = useTheme();
-
   const ref = React.useRef<HTMLDetailsElement>(null);
   const [open, setOpen] = React.useState(false);
 
@@ -48,8 +46,6 @@ export const useDetails = (inProps: DetailsProps) => {
   }, [setOpen]);
 
   return {
-    color: "primary" as const,
-    ...inProps,
     open,
     onOpenToggle,
     Icon,

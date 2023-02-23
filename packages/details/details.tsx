@@ -1,8 +1,13 @@
 import React, { ReactNode } from "react";
+import clsx from "clsx";
 
-import { styled } from "@mui/material";
+import { styled, useThemeProps } from "@mui/material";
+
+import { unstable_composeClasses as composeClasses } from "@mui/utils";
+
 import { useDetails } from "./use-details";
 import { SummaryFocusColor } from "./types";
+import { getDetailsUtilityClass } from "./details-classes";
 export interface DetailsProps {
   /**
    * the title to be rendered on the summary
@@ -19,37 +24,54 @@ export interface DetailsProps {
    */
 
   color?: SummaryFocusColor;
+
+  /**
+   * @ignore
+   */
+  className?: string;
 }
+
+const useUtilityClasses = (ownerState) => {
+  const { color, classes } = ownerState;
+
+  const slots = {
+    root: ["root", color],
+    // summary: ["summary"],
+  };
+
+  return composeClasses(slots, getDetailsUtilityClass, classes);
+};
 
 const DetailsRoot = styled("details", {
   name: "BaxDetails",
   slot: "Root",
-  // overridesResolver: (props, styles) => {
-  //   return [styles.root];
-  // },
-})({
+  overridesResolver: (props, styles) => {
+    return [styles.root];
+  },
+})(({ theme, ownerState }) => ({
   backgroundColor: "rgb(255, 255, 255)",
   border: "1px solid rgb(219, 229, 230)",
   borderRadius: "1rem",
   display: "block",
   width: "100%",
-});
 
-interface SummaryProps {
-  color: SummaryFocusColor;
-}
+  "& > summary:focus": {
+    outline: `${theme.palette[ownerState.color].main} dotted 3px`,
+  },
+}));
 
-const Summary = styled("summary")<SummaryProps>(({ theme, color }) => ({
+const Summary = styled(
+  "summary",
+  {}
+)(({ theme }) => ({
   listStyle: "none",
   cursor: "pointer",
   padding: "2rem 3rem",
   display: "flex",
   gap: "2rem",
   alignItems: "center",
-  "&:focus": {
-    outline: `${theme.palette[color].main} dotted 3px`,
-  },
 }));
+
 const SummaryTitle = styled("span")(({ theme }) => ({
   backgroundColor: "transparent",
   fontSize: "1.2rem",
@@ -57,6 +79,7 @@ const SummaryTitle = styled("span")(({ theme }) => ({
   lineHeight: 1.5,
   margin: 0,
 }));
+
 const Content = styled("div")(({ theme }) => ({
   backgroundColor: "transparent",
   padding: "2rem 3rem",
@@ -64,6 +87,7 @@ const Content = styled("div")(({ theme }) => ({
   color: "rgb(115, 115, 115)",
   wordBreak: "break-word",
 }));
+
 const ContentText = styled("p")(({ theme }) => ({
   margin: 0,
   backgroundColor: "transparent",
@@ -72,12 +96,32 @@ const ContentText = styled("p")(({ theme }) => ({
   width: "100%",
 }));
 
-export function Details(props: DetailsProps) {
-  const { title, children, open, Icon, ref, color } = useDetails(props);
+export function Details(inProps: DetailsProps) {
+  const { open, Icon, ref } = useDetails(inProps);
+
+  const props = useThemeProps({
+    props: inProps,
+    name: "BaxDetails",
+  });
+
+  const { className, title, children, color = "primary" } = props;
+
+  const ownerState = {
+    ...props,
+    color,
+  };
+
+  const classes = useUtilityClasses(ownerState);
 
   return (
-    <DetailsRoot open={open} ref={ref}>
-      <Summary color={color}>
+    <DetailsRoot
+      ownerState={ownerState}
+      open={open}
+      ref={ref}
+      className={clsx(classes.root, className)}
+      data-testid="Details"
+    >
+      <Summary>
         <SummaryTitle>{title}</SummaryTitle>
         <Icon fontSize="medium" />
       </Summary>
