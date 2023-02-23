@@ -1,6 +1,12 @@
 import React from "react";
 import { Details } from "./details";
-import { content, title, Wrapper, WrapperOverrides } from "./test";
+import {
+  content,
+  overrideContent,
+  title,
+  Wrapper,
+  WrapperOverrides,
+} from "./test";
 
 export const BasicDetails = () => {
   return (
@@ -76,7 +82,7 @@ export const WarningDetails = () => {
 export const OverrideDetailsRoot = () => {
   return (
     <WrapperOverrides>
-      <Details title={title}>{content}</Details>
+      <Details title={title}>{overrideContent}</Details>
     </WrapperOverrides>
   );
 };

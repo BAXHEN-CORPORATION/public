@@ -11,7 +11,7 @@ import {
   SuccessDetails,
   WarningDetails,
 } from "./details.composition";
-import { content, themeOverrides, title } from "./test";
+import { content, overrideContent, themeOverrides, title } from "./test";
 import detailsClasses from "./details-classes";
 
 it("should render with the correct summary text", () => {
@@ -159,7 +159,7 @@ it("should receive styles from the theme for the ContentWrapper component", () =
 });
 it("should receive styles from the theme for the ContentText component", () => {
   const { getByText } = render(<OverrideDetailsRoot />);
-  const rendered = getByText(content);
+  const rendered = getByText(overrideContent);
 
   expect(rendered).toHaveStyle(
     `color:${
