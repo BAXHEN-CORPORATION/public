@@ -10,9 +10,8 @@
 
 {
     "details": {
-        "scope": "",
+        "scope": "baxhen.public",
         "version": "0.0.1",
-        "defaultScope": "baxhen.public",
         "mainFile": "index.ts",
         "rootDir": "packages/details"
     },
