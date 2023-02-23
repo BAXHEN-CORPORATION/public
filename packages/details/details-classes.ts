@@ -20,6 +20,8 @@ export interface DetailsClasses {
   warning: string;
   /** Styles applied to the summary element. */
   summary: string;
+  /** Styles applied to the summary title element. */
+  summaryTitle: string;
 }
 
 export type DetailsClassKey = keyof DetailsClasses;
@@ -39,6 +41,7 @@ const detailsClasses: DetailsClasses = generateUtilityClasses(
     "warning",
     "info",
     "summary",
+    "summaryTitle",
   ],
   "Bax"
 );

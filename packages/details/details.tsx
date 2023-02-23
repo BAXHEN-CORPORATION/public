@@ -73,13 +73,17 @@ const Summary = styled("summary", {
   alignItems: "center",
 });
 
-const SummaryTitle = styled("span")(({ theme }) => ({
+const SummaryTitle = styled("span", {
+  name: "BaxDetails",
+  slot: "SummaryTitle",
+  overridesResolver: (props, styles) => styles.summaryTitle,
+})({
   backgroundColor: "transparent",
   fontSize: "1.2rem",
   fontWeight: 600,
   lineHeight: 1.5,
   margin: 0,
-}));
+});
 
 const Content = styled("div")(({ theme }) => ({
   backgroundColor: "transparent",
