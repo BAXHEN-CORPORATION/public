@@ -126,7 +126,18 @@ it("should receive styles from the theme for the DetailsRoot component", () => {
     }`
   );
 });
-it.todo("should receive styles from the theme for the Summary component");
+
+it("should receive styles from the theme for the Summary component", () => {
+  const { getByTestId } = render(<OverrideDetailsRoot />);
+  const rendered = getByTestId("Details");
+
+  expect(rendered).toHaveStyle(
+    `background-color:${
+      themeOverrides.components!.BaxDetails!.styleOverrides.summary
+        .backgroundColor
+    }`
+  );
+});
 it.todo("should receive styles from the theme for the SummaryTitle component");
 it.todo("should receive styles from the theme for the Content component");
 it.todo("should receive styles from the theme for the ContentText component");
