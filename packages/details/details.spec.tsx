@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 
 import {
   BasicDetails,
@@ -34,7 +34,10 @@ it("should not show the content if the title is not clicked", () => {
 it("should show the content if the title is clicked", () => {
   const { getByText } = render(<BasicDetails />);
   const renderedTitle = getByText(title);
-  renderedTitle.click();
+
+  act(() => {
+    renderedTitle.click();
+  });
 
   const rendered = screen.queryByText(content);
   expect(rendered).toBeVisible();
@@ -42,8 +45,11 @@ it("should show the content if the title is clicked", () => {
 it("should hide the content if the title is clicked twice", () => {
   const { getByText } = render(<BasicDetails />);
   const renderedTitle = getByText(title);
-  renderedTitle.click();
-  renderedTitle.click();
+
+  act(() => {
+    renderedTitle.click();
+    renderedTitle.click();
+  });
 
   const rendered = screen.queryByText(content);
   expect(rendered).not.toBeVisible();
