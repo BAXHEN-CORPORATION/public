@@ -72,6 +72,7 @@ const Summary = styled("summary", {
   cursor: "pointer",
   padding: "1rem 1.5rem",
   display: "flex",
+  justifyContent: "space-between",
   gap: "1rem",
   alignItems: "center",
   [`${theme.breakpoints.up("md")}`]: {
