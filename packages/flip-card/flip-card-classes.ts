@@ -6,6 +6,8 @@ import {
 export interface FlipCardClasses {
   /** Styles applied to the root element. */
   root: string;
+  /** Styles applied to the root element if `variant="outlined"`. */
+  outlined: string;
   //   /** Styles applied to the root element if `variant="text"`. */
   //   text: string;
   //   /** Styles applied to the root element if `variant="text"` and `color="inherit"`. */
@@ -22,8 +24,6 @@ export interface FlipCardClasses {
   //   textInfo: string;
   //   /** Styles applied to the root element if `variant="text"` and `color="warning"`. */
   //   textWarning: string;
-  //   /** Styles applied to the root element if `variant="outlined"`. */
-  //   outlined: string;
   //   /** Styles applied to the root element if `variant="outlined"` and `color="inherit"`. */
   //   outlinedInherit: string;
   //   /** Styles applied to the root element if `variant="outlined"` and `color="primary"`. */
@@ -110,6 +110,7 @@ const flipCardClasses: FlipCardClasses = generateUtilityClasses(
   "BaxFlipCard",
   [
     "root",
+    "outlined",
     //   "text",
     //   "textInherit",
     //   "textPrimary",
@@ -126,7 +127,6 @@ const flipCardClasses: FlipCardClasses = generateUtilityClasses(
     //   "outlinedError",
     //   "outlinedInfo",
     //   "outlinedWarning",
-    //   "contained",
     //   "containedInherit",
     //   "containedPrimary",
     //   "containedSecondary",

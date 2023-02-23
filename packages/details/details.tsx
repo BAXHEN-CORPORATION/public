@@ -51,7 +51,7 @@ const DetailsRoot = styled("details", {
   overridesResolver: (props, styles) => {
     return [styles.root, styles.primary];
   },
-})(({ theme, ownerState }) => ({
+})<{ ownerState: any }>(({ theme, ownerState }) => ({
   backgroundColor: "rgb(255, 255, 255)",
   border: "1px solid rgb(219, 229, 230)",
   borderRadius: "1rem",

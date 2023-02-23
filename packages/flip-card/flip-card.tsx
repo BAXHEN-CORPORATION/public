@@ -14,7 +14,8 @@ const FlipCardRoot = styled("div", {
   name: "BaxFlipCard",
   slot: "Root",
   overridesResolver: (props, styles) => {
-    return [styles.root];
+    console.log({ styles });
+    return [styles.root, styles.outlined];
   },
 })({
   backgroundColor: "transparent",
@@ -23,6 +24,7 @@ const FlipCardRoot = styled("div", {
   perspective: "1000px",
   borderRadius: "20px",
 });
+
 const FlipCardContainer = styled(Box)({
   position: "relative",
   width: "100%",

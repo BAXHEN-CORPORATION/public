@@ -11,7 +11,13 @@ import {
   SuccessDetails,
   WarningDetails,
 } from "./details.composition";
-import { content, overrideContent, themeOverrides, title } from "./test";
+import {
+  BaxDetailsOverrides,
+  content,
+  overrideContent,
+  themeOverrides,
+  title,
+} from "./test";
 import detailsClasses from "./details-classes";
 
 it("should render with the correct summary text", () => {
@@ -122,7 +128,7 @@ it("should receive styles from the theme for the DetailsRoot component", () => {
 
   expect(rendered).toHaveStyle(
     `background-color:${
-      themeOverrides.components!.BaxDetails!.styleOverrides.root.backgroundColor
+      BaxDetailsOverrides!.styleOverrides.root.backgroundColor
     }`
   );
 });
@@ -132,9 +138,7 @@ it("should receive styles from the theme for the Summary component", () => {
   const rendered = getByTestId("Summary");
 
   expect(rendered).toHaveStyle(
-    `color:${
-      themeOverrides.components!.BaxDetails!.styleOverrides.summary.color
-    }`
+    `color:${BaxDetailsOverrides!.styleOverrides.summary.color}`
   );
 });
 it("should receive styles from the theme for the SummaryTitle component", () => {
@@ -142,9 +146,7 @@ it("should receive styles from the theme for the SummaryTitle component", () => 
   const rendered = getByText(title);
 
   expect(rendered).toHaveStyle(
-    `color:${
-      themeOverrides.components!.BaxDetails!.styleOverrides.summaryTitle.color
-    }`
+    `color:${BaxDetailsOverrides!.styleOverrides.summaryTitle.color}`
   );
 });
 it("should receive styles from the theme for the ContentWrapper component", () => {
@@ -152,9 +154,7 @@ it("should receive styles from the theme for the ContentWrapper component", () =
   const rendered = getByTestId("ContentWrapper");
 
   expect(rendered).toHaveStyle(
-    `color:${
-      themeOverrides.components!.BaxDetails!.styleOverrides.contentWrapper.color
-    }`
+    `color:${BaxDetailsOverrides!.styleOverrides.contentWrapper.color}`
   );
 });
 it("should receive styles from the theme for the ContentText component", () => {
@@ -162,8 +162,6 @@ it("should receive styles from the theme for the ContentText component", () => {
   const rendered = getByText(overrideContent);
 
   expect(rendered).toHaveStyle(
-    `color:${
-      themeOverrides.components!.BaxDetails!.styleOverrides.contentText.color
-    }`
+    `color:${BaxDetailsOverrides!.styleOverrides.contentText.color}`
   );
 });
