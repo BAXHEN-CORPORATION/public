@@ -37,3 +37,39 @@ export const SecondaryDetails = () => {
     </Wrapper>
   );
 };
+export const SuccessDetails = () => {
+  return (
+    <Wrapper>
+      <Details color="success" title={title}>
+        This a success color focus state
+      </Details>
+    </Wrapper>
+  );
+};
+export const ErrorDetails = () => {
+  return (
+    <Wrapper>
+      <Details color="error" title={title}>
+        This a error color focus state
+      </Details>
+    </Wrapper>
+  );
+};
+export const InfoDetails = () => {
+  return (
+    <Wrapper>
+      <Details color="info" title={title}>
+        This a info color focus state
+      </Details>
+    </Wrapper>
+  );
+};
+export const WarningDetails = () => {
+  return (
+    <Wrapper>
+      <Details color="warning" title={title}>
+        This a warning color focus state
+      </Details>
+    </Wrapper>
+  );
+};

@@ -3,8 +3,12 @@ import { render, screen } from "@testing-library/react";
 
 import {
   BasicDetails,
+  ErrorDetails,
+  InfoDetails,
   PrimaryDetails,
   SecondaryDetails,
+  SuccessDetails,
+  WarningDetails,
 } from "./details.composition";
 import { content, title } from "./test";
 import detailsClasses from "./details-classes";
@@ -63,7 +67,7 @@ it("should render with the root and secondary classes but no others", () => {
   expect(rendered).not.toHaveClass(detailsClasses.warning);
 });
 it("should render with the root and error classes but no others", () => {
-  const { getByTestId } = render(<SecondaryDetails />);
+  const { getByTestId } = render(<ErrorDetails />);
   const rendered = getByTestId("Details");
 
   expect(rendered).toHaveClass(detailsClasses.root);
@@ -75,7 +79,7 @@ it("should render with the root and error classes but no others", () => {
   expect(rendered).not.toHaveClass(detailsClasses.warning);
 });
 it("should render with the root and success classes but no others", () => {
-  const { getByTestId } = render(<SecondaryDetails />);
+  const { getByTestId } = render(<SuccessDetails />);
   const rendered = getByTestId("Details");
 
   expect(rendered).toHaveClass(detailsClasses.root);
@@ -87,7 +91,7 @@ it("should render with the root and success classes but no others", () => {
   expect(rendered).not.toHaveClass(detailsClasses.warning);
 });
 it("should render with the root and info classes but no others", () => {
-  const { getByTestId } = render(<SecondaryDetails />);
+  const { getByTestId } = render(<InfoDetails />);
   const rendered = getByTestId("Details");
 
   expect(rendered).toHaveClass(detailsClasses.root);
@@ -99,7 +103,7 @@ it("should render with the root and info classes but no others", () => {
   expect(rendered).not.toHaveClass(detailsClasses.warning);
 });
 it("should render with the root and warning classes but no others", () => {
-  const { getByTestId } = render(<SecondaryDetails />);
+  const { getByTestId } = render(<WarningDetails />);
   const rendered = getByTestId("Details");
 
   expect(rendered).toHaveClass(detailsClasses.root);
