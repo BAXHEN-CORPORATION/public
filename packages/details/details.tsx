@@ -37,6 +37,9 @@ const useUtilityClasses = (ownerState) => {
   const slots = {
     root: ["root", color],
     summary: ["summary"],
+    summaryTitle: ["summaryTitle"],
+    contentWrapper: ["contentWrapper"],
+    contentText: ["contentText"],
   };
 
   return composeClasses(slots, getDetailsUtilityClass, classes);
@@ -97,13 +100,17 @@ const ContentWrapper = styled("div", {
   wordBreak: "break-word",
 });
 
-const ContentText = styled("p")(({ theme }) => ({
+const ContentText = styled("p", {
+  name: "BaxDetails",
+  slot: "ContentText",
+  overridesResolver: (props, styles) => styles.contentText,
+})({
   margin: 0,
   backgroundColor: "transparent",
   lineHeight: 1.5,
   fontWeight: 400,
   width: "100%",
-}));
+});
 
 export function Details(inProps: DetailsProps) {
   const { open, Icon, ref } = useDetails(inProps);
@@ -131,11 +138,14 @@ export function Details(inProps: DetailsProps) {
       data-testid="Details"
     >
       <Summary data-testid="Summary" className={classes.summary}>
-        <SummaryTitle>{title}</SummaryTitle>
+        <SummaryTitle className={classes.summaryTitle}>{title}</SummaryTitle>
         <Icon fontSize="medium" />
       </Summary>
-      <ContentWrapper data-testid="ContentWrapper">
-        <ContentText>{children}</ContentText>
+      <ContentWrapper
+        className={classes.contentWrapper}
+        data-testid="ContentWrapper"
+      >
+        <ContentText className={classes.contentText}>{children}</ContentText>
       </ContentWrapper>
     </DetailsRoot>
   );

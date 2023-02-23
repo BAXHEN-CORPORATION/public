@@ -24,6 +24,8 @@ export interface DetailsClasses {
   summaryTitle: string;
   /** Styles applied to the content wrapper element. */
   contentWrapper: string;
+  /** Styles applied to the content text element. */
+  contentText: string;
 }
 
 export type DetailsClassKey = keyof DetailsClasses;
@@ -45,6 +47,7 @@ const detailsClasses: DetailsClasses = generateUtilityClasses(
     "summary",
     "summaryTitle",
     "contentWrapper",
+    "contentText",
   ],
   "Bax"
 );
