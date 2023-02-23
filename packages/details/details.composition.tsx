@@ -1,6 +1,6 @@
 import React from "react";
 import { Details } from "./details";
-import { content, title, Wrapper } from "./test";
+import { content, title, Wrapper, WrapperOverrides } from "./test";
 
 export const BasicDetails = () => {
   return (
@@ -71,5 +71,12 @@ export const WarningDetails = () => {
         This a warning color focus state
       </Details>
     </Wrapper>
+  );
+};
+export const OverrideDetailsRoot = () => {
+  return (
+    <WrapperOverrides>
+      <Details title={title}>This a warning color focus state</Details>
+    </WrapperOverrides>
   );
 };

@@ -5,12 +5,13 @@ import {
   BasicDetails,
   ErrorDetails,
   InfoDetails,
+  OverrideDetailsRoot,
   PrimaryDetails,
   SecondaryDetails,
   SuccessDetails,
   WarningDetails,
 } from "./details.composition";
-import { content, title } from "./test";
+import { content, theme, themeOverrides, title } from "./test";
 import detailsClasses from "./details-classes";
 
 it("should render with the correct summary text", () => {
@@ -115,7 +116,16 @@ it("should render with the root and warning classes but no others", () => {
   expect(rendered).toHaveClass(detailsClasses.warning);
 });
 
-it.todo("should receive styles from the theme for the DetailsRoot component");
+it("should receive styles from the theme for the DetailsRoot component", () => {
+  const { getByTestId } = render(<OverrideDetailsRoot />);
+  const rendered = getByTestId("Details");
+
+  expect(rendered).toHaveStyle(
+    `background-color:${
+      themeOverrides.components!.BaxDetails!.styleOverrides.root.backgroundColor
+    }`
+  );
+});
 it.todo("should receive styles from the theme for the Summary component");
 it.todo("should receive styles from the theme for the SummaryTitle component");
 it.todo("should receive styles from the theme for the Content component");

@@ -46,7 +46,8 @@ const DetailsRoot = styled("details", {
   name: "BaxDetails",
   slot: "Root",
   overridesResolver: (props, styles) => {
-    return [styles.root];
+    console.log({ styles, props });
+    return [styles.root, styles.primary];
   },
 })(({ theme, ownerState }) => ({
   backgroundColor: "rgb(255, 255, 255)",
