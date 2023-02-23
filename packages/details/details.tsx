@@ -67,14 +67,22 @@ const Summary = styled("summary", {
   name: "BaxDetails",
   slot: "Summary",
   overridesResolver: (props, styles) => styles.summary,
-})({
+})(({ theme }) => ({
   listStyle: "none",
   cursor: "pointer",
-  padding: "2rem 3rem",
+  padding: "1rem 1.5rem",
   display: "flex",
-  gap: "2rem",
+  gap: "1rem",
   alignItems: "center",
-});
+  [`${theme.breakpoints.up("md")}`]: {
+    padding: "2rem 3rem",
+    gap: "2rem",
+  },
+  [`${theme.breakpoints.up("sm")}`]: {
+    padding: "1.5rem 2.25rem",
+    gap: "1.5rem",
+  },
+}));
 
 const SummaryTitle = styled("span", {
   name: "BaxDetails",
@@ -92,25 +100,41 @@ const ContentWrapper = styled("div", {
   name: "BaxDetails",
   slot: "ContentWrapper",
   overridesResolver: (props, styles) => styles.contentWrapper,
-})({
+})(({ theme }) => ({
   backgroundColor: "transparent",
-  padding: "2rem 3rem",
+  padding: "1rem 1.5rem",
   borderTop: "1px solid rgb(219, 229, 230)",
   color: "rgb(115, 115, 115)",
   wordBreak: "break-word",
-});
+
+  [`${theme.breakpoints.up("md")}`]: {
+    padding: "2rem 3rem",
+    gap: "2rem",
+  },
+  [`${theme.breakpoints.up("sm")}`]: {
+    padding: "1.5rem 2.25rem",
+    gap: "1.5rem",
+  },
+}));
 
 const ContentText = styled("p", {
   name: "BaxDetails",
   slot: "ContentText",
   overridesResolver: (props, styles) => styles.contentText,
-})({
-  margin: 0,
+})(({ theme }) => ({
+  marginBottom: "1rem",
   backgroundColor: "transparent",
   lineHeight: 1.5,
   fontWeight: 400,
   width: "100%",
-});
+
+  [`${theme.breakpoints.up("md")}`]: {
+    marginBottom: "2rem",
+  },
+  [`${theme.breakpoints.up("sm")}`]: {
+    marginBottom: "1.5rem",
+  },
+}));
 
 export function Details(inProps: DetailsProps) {
   const { open, Icon, ref } = useDetails(inProps);
