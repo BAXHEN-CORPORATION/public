@@ -12,7 +12,7 @@ import {
   WarningDetails,
 } from "./details.composition";
 import {
-  BaxDetailsOverrides,
+  Overrides,
   content,
   overrideContent,
   themeOverrides,
@@ -133,9 +133,7 @@ it("should receive styles from the theme for the DetailsRoot component", () => {
   const rendered = getByTestId("Details");
 
   expect(rendered).toHaveStyle(
-    `background-color:${
-      BaxDetailsOverrides!.styleOverrides.root.backgroundColor
-    }`
+    `background-color:${Overrides.styleOverrides.root.backgroundColor}`
   );
 });
 
@@ -144,7 +142,7 @@ it("should receive styles from the theme for the Summary component", () => {
   const rendered = getByTestId("Summary");
 
   expect(rendered).toHaveStyle(
-    `color:${BaxDetailsOverrides!.styleOverrides.summary.color}`
+    `color:${Overrides.styleOverrides.summary.color}`
   );
 });
 it("should receive styles from the theme for the SummaryTitle component", () => {
@@ -152,7 +150,7 @@ it("should receive styles from the theme for the SummaryTitle component", () => 
   const rendered = getByText(title);
 
   expect(rendered).toHaveStyle(
-    `color:${BaxDetailsOverrides!.styleOverrides.summaryTitle.color}`
+    `color:${Overrides.styleOverrides.summaryTitle.color}`
   );
 });
 it("should receive styles from the theme for the ContentWrapper component", () => {
@@ -160,7 +158,7 @@ it("should receive styles from the theme for the ContentWrapper component", () =
   const rendered = getByTestId("ContentWrapper");
 
   expect(rendered).toHaveStyle(
-    `color:${BaxDetailsOverrides!.styleOverrides.contentWrapper.color}`
+    `color:${Overrides.styleOverrides.contentWrapper.color}`
   );
 });
 it("should receive styles from the theme for the ContentText component", () => {
@@ -168,6 +166,6 @@ it("should receive styles from the theme for the ContentText component", () => {
   const rendered = getByText(overrideContent);
 
   expect(rendered).toHaveStyle(
-    `color:${BaxDetailsOverrides!.styleOverrides.contentText.color}`
+    `color:${Overrides.styleOverrides.contentText.color}`
   );
 });

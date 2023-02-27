@@ -1,14 +1,15 @@
+import "@mui/material/styles";
 import "@mui/material";
 import {
   ComponentsProps,
   ComponentsOverrides,
   ComponentsVariants,
-} from "@mui/material";
+} from "@mui/material/styles";
 
 import { DetailsProps } from "./details";
 import { DetailsClassKey } from "./details-classes";
 
-declare module "@mui/material" {
+declare module "@mui/material/styles" {
   interface ComponentsPropsList {
     BaxDetails: DetailsProps;
   }
