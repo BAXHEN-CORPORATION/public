@@ -14,7 +14,6 @@ const FlipCardRoot = styled("div", {
   name: "BaxFlipCard",
   slot: "Root",
   overridesResolver: (props, styles) => {
-    console.log({ styles });
     return [styles.root, styles.outlined];
   },
 })({

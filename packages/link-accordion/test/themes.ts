@@ -1,29 +1,45 @@
-import { Components, createTheme } from "@mui/material";
+import { Components, createTheme } from "@mui/material/styles";
 
-// const BaxLinkAccordionOverrides: Components["BaxLinkAccordion"] = {
-//   defaultProps: { color: "primary" },
-//   styleOverrides: {
-//     root: { backgroundColor: "blue" },
-//     summary: { color: "green" },
-//     summaryTitle: { color: "green" },
-//     contentWrapper: { color: "green" },
-//     contentText: { color: "green" },
-//   },
-// };
-export const BaxLinkAccordionOverrides: any = {
+import "@mui/material";
+import {
+  ComponentsProps,
+  ComponentsOverrides,
+  ComponentsVariants,
+} from "@mui/material";
+
+import { LinkAccordionProps } from "../link-accordion";
+import { LinkAccordionClassKey } from "../link-accordion-classes";
+
+declare module "@mui/material/styles" {
+  interface ComponentsPropsList {
+    BaxLinkAccordion: LinkAccordionProps;
+  }
+
+  interface ComponentNameToClassKey {
+    BaxLinkAccordion: LinkAccordionClassKey;
+  }
+  interface Components<Theme = unknown> {
+    BaxLinkAccordion?: {
+      defaultProps?: ComponentsProps["BaxLinkAccordion"];
+      styleOverrides?: ComponentsOverrides<Theme>["BaxLinkAccordion"];
+      variants?: ComponentsVariants["BaxLinkAccordion"];
+    };
+  }
+}
+
+export const Overrides = {
   defaultProps: { color: "primary" },
   styleOverrides: {
     root: { backgroundColor: "blue" },
-    summary: { color: "green" },
-    summaryTitle: { color: "green" },
-    contentWrapper: { color: "green" },
-    contentText: { color: "green" },
   },
-};
+} as const;
+
+const BaxLinkAccordion: Components["BaxLinkAccordion"] = Overrides;
+
 export const theme = createTheme();
 export const themeOverrides = createTheme({
   palette: { primary: { main: "#FF0000" } },
   components: {
-    BaxLinkAccordion: BaxLinkAccordionOverrides,
-  } as any,
+    BaxLinkAccordion,
+  },
 });
