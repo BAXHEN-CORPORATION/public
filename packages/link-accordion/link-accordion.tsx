@@ -169,7 +169,7 @@ export function LinkAccordion(inProps: LinkAccordionProps) {
       ref={ref}
       data-testid="LinkAccordion"
     >
-      <Summary className={classes.summary}>
+      <Summary className={classes.summary} data-testid="Summary">
         <SummaryTitle ownerState={ownerState} className={classes.summaryTitle}>
           {title}
         </SummaryTitle>{" "}

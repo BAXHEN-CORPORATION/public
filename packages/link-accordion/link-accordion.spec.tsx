@@ -142,3 +142,15 @@ it("should render with the root and warning classes but no others", () => {
   expect(rendered).not.toHaveClass(linkAccordionClasses.info);
   expect(rendered).toHaveClass(linkAccordionClasses.warning);
 });
+
+it.todo(
+  "should receive styles from the theme for the LinkAccordionRoot component"
+);
+it.todo("should receive styles from the theme for the Summary component");
+it.todo("should receive styles from the theme for the SummaryTitle component");
+it.todo(
+  "should receive styles from the theme for the ContentWrapper component"
+);
+it.todo("should receive styles from the theme for the LinkWrapper component");
+it.todo("should receive styles from the theme for the LinkLabel component");
+it.todo("should receive styles from the theme for the LinkDetail component");
