@@ -1,16 +1,17 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode } from "react";
 
 export type LinkAccordionProps = {
   /**
-   * a node to be rendered in the special component.
+   * the title to be rendered on the summary
    */
-  children?: ReactNode;
+
+  title: string;
 };
 
-export function LinkAccordion({ children }: LinkAccordionProps) {
+export function LinkAccordion({ title }: LinkAccordionProps) {
   return (
-    <div>
-      {children}
-    </div>
+    <details>
+      <summary>{title}</summary>
+    </details>
   );
 }
