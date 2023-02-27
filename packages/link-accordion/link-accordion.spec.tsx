@@ -1,7 +1,15 @@
 import React from "react";
 import { act, render, screen } from "@testing-library/react";
-import { BasicLinkAccordion } from "./link-accordion.composition";
+import {
+  BasicLinkAccordion,
+  ErrorLinkAccordion,
+  InfoLinkAccordion,
+  SecondaryLinkAccordion,
+  SuccessLinkAccordion,
+  WarningLinkAccordion,
+} from "./link-accordion.composition";
 import { links, title } from "./test/data";
+import linkAccordionClasses from "./link-accordion-classes";
 
 it("should render with the correct title text", () => {
   const { getByText } = render(<BasicLinkAccordion />);
@@ -59,4 +67,78 @@ it("should run callback on link label click with all link data if the callback i
   links.forEach((link, index) => {
     expect(callback.mock.calls[index][0]).toBe(link);
   });
+});
+
+it("should render with the root and primary classes but no others", () => {
+  const { getByTestId } = render(<BasicLinkAccordion />);
+  const rendered = getByTestId("LinkAccordion");
+
+  expect(rendered).toHaveClass(linkAccordionClasses.root);
+  expect(rendered).toHaveClass(linkAccordionClasses.primary);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.secondary);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.error);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.success);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.info);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.warning);
+});
+
+it("should render with the root and secondary classes but no others", () => {
+  const { getByTestId } = render(<SecondaryLinkAccordion />);
+  const rendered = getByTestId("LinkAccordion");
+
+  expect(rendered).toHaveClass(linkAccordionClasses.root);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.primary);
+  expect(rendered).toHaveClass(linkAccordionClasses.secondary);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.error);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.success);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.info);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.warning);
+});
+it("should render with the root and error classes but no others", () => {
+  const { getByTestId } = render(<ErrorLinkAccordion />);
+  const rendered = getByTestId("LinkAccordion");
+
+  expect(rendered).toHaveClass(linkAccordionClasses.root);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.primary);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.secondary);
+  expect(rendered).toHaveClass(linkAccordionClasses.error);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.success);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.info);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.warning);
+});
+it("should render with the root and success classes but no others", () => {
+  const { getByTestId } = render(<SuccessLinkAccordion />);
+  const rendered = getByTestId("LinkAccordion");
+
+  expect(rendered).toHaveClass(linkAccordionClasses.root);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.primary);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.secondary);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.error);
+  expect(rendered).toHaveClass(linkAccordionClasses.success);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.info);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.warning);
+});
+it("should render with the root and info classes but no others", () => {
+  const { getByTestId } = render(<InfoLinkAccordion />);
+  const rendered = getByTestId("LinkAccordion");
+
+  expect(rendered).toHaveClass(linkAccordionClasses.root);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.primary);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.secondary);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.error);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.success);
+  expect(rendered).toHaveClass(linkAccordionClasses.info);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.warning);
+});
+it("should render with the root and warning classes but no others", () => {
+  const { getByTestId } = render(<WarningLinkAccordion />);
+  const rendered = getByTestId("LinkAccordion");
+
+  expect(rendered).toHaveClass(linkAccordionClasses.root);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.primary);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.secondary);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.error);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.success);
+  expect(rendered).not.toHaveClass(linkAccordionClasses.info);
+  expect(rendered).toHaveClass(linkAccordionClasses.warning);
 });

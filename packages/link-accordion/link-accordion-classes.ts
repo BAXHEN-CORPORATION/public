@@ -6,18 +6,18 @@ import {
 export interface LinkAccordionClasses {
   /** Styles applied to the root element. */
   root: string;
-  // /** Styles applied to the root element if `color="primary"`. */
-  // primary: string;
-  // /** Styles applied to the root element if `color="secondary"`. */
-  // secondary: string;
-  // /** Styles applied to the root element if `color="error"`. */
-  // error: string;
-  // /** Styles applied to the root element if `color="success"`. */
-  // success: string;
-  // /** Styles applied to the root element if `color="info"`. */
-  // info: string;
-  // /** Styles applied to the root element if `color="warning"`. */
-  // warning: string;
+  /** Styles applied to the root element if `color="primary"`. */
+  primary: string;
+  /** Styles applied to the root element if `color="secondary"`. */
+  secondary: string;
+  /** Styles applied to the root element if `color="error"`. */
+  error: string;
+  /** Styles applied to the root element if `color="success"`. */
+  success: string;
+  /** Styles applied to the root element if `color="info"`. */
+  info: string;
+  /** Styles applied to the root element if `color="warning"`. */
+  warning: string;
   // /** Styles applied to the summary element. */
   // summary: string;
   // /** Styles applied to the summary title element. */
@@ -34,16 +34,16 @@ export function getLinkAccordionUtilityClass(slot: string): string {
   return generateUtilityClass("BaxLinkAccordion", slot, "Bax");
 }
 
-const LinkAccordionClasses: LinkAccordionClasses = generateUtilityClasses(
+const linkAccordionClasses: LinkAccordionClasses = generateUtilityClasses(
   "BaxLinkAccordion",
   [
     "root",
-    // "primary",
-    // "secondary",
-    // "error",
-    // "success",
-    // "warning",
-    // "info",
+    "primary",
+    "secondary",
+    "error",
+    "success",
+    "warning",
+    "info",
     // "summary",
     // "summaryTitle",
     // "contentWrapper",
@@ -52,4 +52,4 @@ const LinkAccordionClasses: LinkAccordionClasses = generateUtilityClasses(
   "Bax"
 );
 
-export default LinkAccordionClasses;
+export default linkAccordionClasses;

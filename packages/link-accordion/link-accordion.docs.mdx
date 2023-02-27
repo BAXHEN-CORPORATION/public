@@ -1,18 +1,50 @@
 ---
 description: A LinkAccordion component.
+labels:
+  [
+    "Material UI v5",
+    "React",
+    "MUI 5",
+    "Details",
+    "Accordion",
+    "Release History",
+  ]
 ---
 
-import { LinkAccordion } from './link-accordion';
+import { LinkAccordion } from "./link-accordion";
 
-A component that does something special and renders text in a div.
+A details link component customized to be used as acordion links.
 
 ### Component usage
+
 ```js
-<LinkAccordion>Hello world!</LinkAccordion>
+<LinkAccordion
+  title="This year (12 releases)"
+  links={[
+    { label: "16.5.0", detail: "6 hours ago" },
+    { label: "16.4.2", detail: "July, 7" },
+    { label: "16.4.2-alpha", detail: "Aug, 28" },
+    { label: "16.4.0", detail: "Aug, 12" },
+  ]}
+  onLinkClick={(link) => {
+    alert(`The link ${link.label} was clicked`);
+  }}
+/>
 ```
 
 ### Render hello world!
 
 ```js live
-<LinkAccordion>Hello world!</LinkAccordion>
+<LinkAccordion
+  title="This year (12 releases)"
+  links={[
+    { label: "16.5.0", detail: "6 hours ago" },
+    { label: "16.4.2", detail: "July, 7" },
+    { label: "16.4.2-alpha", detail: "Aug, 28" },
+    { label: "16.4.0", detail: "Aug, 12" },
+  ]}
+  onLinkClick={(link) => {
+    alert(`The link ${link.label} was clicked`);
+  }}
+/>
 ```
