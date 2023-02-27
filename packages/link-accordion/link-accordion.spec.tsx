@@ -37,11 +37,26 @@ it("should show the links if the title is not clicked and the links are passed",
   });
 });
 
-// it.todo(
-//   "should run callback on link label click with all link data if the callback is passed",
-//   () => {
-//     const callback = jest.fn();
+it("should run callback on link label click with all link data if the callback is passed", () => {
+  const callback = jest.fn();
 
-//     render(<BasicLinkAccordion onLinkClick={callback} />);
-//   }
-// );
+  const { getByText } = render(<BasicLinkAccordion onLinkClick={callback} />);
+
+  const rendered = getByText(title);
+
+  act(() => {
+    rendered.click();
+  });
+
+  links.forEach(({ label }) => {
+    const renderedLabel = getByText(label);
+
+    renderedLabel.click();
+  });
+
+  expect(callback).toHaveBeenCalledTimes(links.length);
+
+  links.forEach((link, index) => {
+    expect(callback.mock.calls[index][0]).toBe(link);
+  });
+});
