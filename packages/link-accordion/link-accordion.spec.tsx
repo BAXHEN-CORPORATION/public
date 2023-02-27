@@ -37,9 +37,11 @@ it("should show the links if the title is not clicked and the links are passed",
   });
 });
 
-// it.todo("should run callback on link label click with all link data if the callback is passed", () => {
-//   const callback = jest.fn();
+it.todo(
+  "should run callback on link label click with all link data if the callback is passed",
+  () => {
+    const callback = jest.fn();
 
-//   render(<BasicLinkAccordion onLinkClick={callback} />);
-
-// });
+    render(<BasicLinkAccordion onLinkClick={callback} />);
+  }
+);
