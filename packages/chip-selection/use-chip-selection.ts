@@ -15,7 +15,9 @@ export const useChipSelection = (props: UseChipSelection) => {
   };
 
   React.useEffect(() => {
-    setChecked(props.checked);
+    if (props.checked != null) {
+      setChecked(props.checked);
+    }
   }, [props.checked]);
 
   return { checked, toggle };
