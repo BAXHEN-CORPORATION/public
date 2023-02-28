@@ -1,11 +1,9 @@
 import React from "react";
 
-import { useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { DetailsProps } from "./details";
 
-export const useDetails = (inProps: DetailsProps) => {
+export const useDetails = () => {
   const ref = React.useRef<HTMLDetailsElement>(null);
   const [open, setOpen] = React.useState(false);
 

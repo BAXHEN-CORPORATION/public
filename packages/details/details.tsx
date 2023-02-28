@@ -8,6 +8,7 @@ import { unstable_composeClasses as composeClasses } from "@mui/utils";
 import { useDetails } from "./use-details";
 import { SummaryFocusColor } from "./types";
 import { getDetailsUtilityClass } from "./details-classes";
+
 export interface DetailsProps {
   /**
    * the title to be rendered on the summary
@@ -138,7 +139,7 @@ const ContentText = styled("p", {
 }));
 
 export function Details(inProps: DetailsProps) {
-  const { open, Icon, ref } = useDetails(inProps);
+  const { open, Icon, ref } = useDetails();
 
   const props = useThemeProps({
     props: inProps,

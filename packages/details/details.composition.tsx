@@ -20,7 +20,7 @@ export const BasicWithNodeDetails = () => {
   return (
     <Wrapper>
       <Details title={title}>
-        This is with node <a href="#">see more</a>
+        This is with node <button>see more</button>
       </Details>
     </Wrapper>
   );

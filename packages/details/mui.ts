@@ -1,12 +1,12 @@
-import { createTheme, Components } from "@mui/material/styles";
-
-import "@mui/material/styles";
-import "@mui/material";
-import {
+import { createTheme, Components ,
   ComponentsProps,
   ComponentsOverrides,
   ComponentsVariants,
 } from "@mui/material/styles";
+
+
+import "@mui/material";
+
 
 import { DetailsProps } from "./details";
 import { DetailsClassKey } from "./details-classes";

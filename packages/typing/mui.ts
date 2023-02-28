@@ -1,4 +1,3 @@
-import "@mui/material";
 import { ComponentsProps } from "@mui/material";
 
 import { TypingProps } from "./typing";
@@ -11,7 +10,7 @@ declare module "@mui/material" {
   interface ComponentNameToClassKey {
     BaxTyping: "BaxTyping";
   }
-  interface Components<Theme = unknown> {
+  interface Components {
     BaxTyping?: {
       defaultProps?: ComponentsProps["BaxTyping"];
     };

@@ -1,6 +1,5 @@
 import { Components, createTheme } from "@mui/material/styles";
 
-import "@mui/material";
 import {
   ComponentsProps,
   ComponentsOverrides,

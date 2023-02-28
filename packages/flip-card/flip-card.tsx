@@ -3,6 +3,7 @@ import React from "react";
 import { styled, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import FlipIcon from "@mui/icons-material/Flip";
+
 export interface FlipCardProps {
   title: string;
   details: string;
