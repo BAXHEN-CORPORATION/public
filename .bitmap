@@ -11,25 +11,25 @@
 {
     "details": {
         "scope": "baxhen.public",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "mainFile": "index.ts",
         "rootDir": "packages/details"
     },
     "flip-card": {
         "scope": "baxhen.public",
-        "version": "0.0.8",
+        "version": "0.0.9",
         "mainFile": "index.ts",
         "rootDir": "packages/flip-card"
     },
     "link-accordion": {
         "scope": "baxhen.public",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "mainFile": "index.ts",
         "rootDir": "packages/link-accordion"
     },
     "typing": {
         "scope": "baxhen.public",
-        "version": "0.0.23",
+        "version": "0.0.24",
         "mainFile": "index.ts",
         "rootDir": "packages/typing"
     },

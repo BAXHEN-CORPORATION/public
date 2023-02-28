@@ -1,14 +1,17 @@
-import "@mui/material";
+import { createTheme } from "@mui/material/styles";
+
+import "@mui/material/styles";
 import {
   ComponentsProps,
   ComponentsOverrides,
   ComponentsVariants,
-} from "@mui/material";
+  Components,
+} from "@mui/material/styles";
 
 import { FlipCardProps } from "./flip-card";
 import { FlipCardClassKey } from "./flip-card-classes";
 
-declare module "@mui/material" {
+declare module "@mui/material/styles" {
   interface ComponentsPropsList {
     BaxFlipCard: FlipCardProps;
   }
@@ -24,3 +27,15 @@ declare module "@mui/material" {
     };
   }
 }
+
+export const Overrides = {
+  styleOverrides: { root: { color: "#FF0000" } },
+} as const;
+
+const BaxFlipCard: Components["BaxFlipCard"] = Overrides;
+
+export const theme = createTheme({
+  components: {
+    BaxFlipCard,
+  },
+});

@@ -11,14 +11,9 @@ import {
   SuccessDetails,
   WarningDetails,
 } from "./details.composition";
-import {
-  Overrides,
-  content,
-  overrideContent,
-  themeOverrides,
-  title,
-} from "./test";
+import { content, overrideContent, title } from "./test";
 import detailsClasses from "./details-classes";
+import { Overrides } from "./mui";
 
 it("should render with the correct summary text", () => {
   const { getByText } = render(<BasicDetails />);

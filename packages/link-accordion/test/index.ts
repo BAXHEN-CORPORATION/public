@@ -1,3 +1,3 @@
 export * from "./data";
-export * from "./themes";
+export * from "../mui";
 export * from "./wrapper";

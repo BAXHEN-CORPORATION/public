@@ -1,3 +1,5 @@
+import { Components, createTheme } from "@mui/material/styles";
+
 import "@mui/material";
 import {
   ComponentsProps,
@@ -8,7 +10,7 @@ import {
 import { LinkAccordionProps } from "./link-accordion";
 import { LinkAccordionClassKey } from "./link-accordion-classes";
 
-declare module "@mui/material" {
+declare module "@mui/material/styles" {
   interface ComponentsPropsList {
     BaxLinkAccordion: LinkAccordionProps;
   }
@@ -24,3 +26,20 @@ declare module "@mui/material" {
     };
   }
 }
+
+export const Overrides = {
+  defaultProps: { color: "primary" },
+  styleOverrides: {
+    root: { backgroundColor: "blue" },
+  },
+} as const;
+
+const BaxLinkAccordion: Components["BaxLinkAccordion"] = Overrides;
+
+export const theme = createTheme();
+export const themeOverrides = createTheme({
+  palette: { primary: { main: "#FF0000" } },
+  components: {
+    BaxLinkAccordion,
+  },
+});

@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 
-import { theme } from "./themes";
+import { theme } from "../mui";
 
 export interface WrapperProps {
   children: React.ReactNode;

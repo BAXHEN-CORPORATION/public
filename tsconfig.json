@@ -1,6 +1,6 @@
 {
   "extends": "./node_modules/@teambit/react/typescript/tsconfig.json",
-  "include": ["./packages/**/*.d.ts"],
+  "include": ["./packages/**/*.ts"],
   "compilerOptions": {
     "noEmit": true,
     "typeRoots": ["./packages/**/*.d.ts"]
