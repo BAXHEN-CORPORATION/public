@@ -9,6 +9,18 @@
  */
 
 {
+    "chip-selection": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "packages/chip-selection",
+        "config": {
+            "teambit.react/react": {},
+            "teambit.envs/envs": {
+                "env": "teambit.react/react"
+            }
+        }
+    },
     "details": {
         "scope": "baxhen.public",
         "version": "0.0.7",
