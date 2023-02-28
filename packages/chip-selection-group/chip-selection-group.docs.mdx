@@ -1,15 +1,29 @@
 ---
-description: A ChipSelectionGroup component.
+description: A Chip Selection Group component.
+labels:
+  [
+    "Material UI v5",
+    "React",
+    "MUI 5",
+    "Chip Button Group",
+    "Chip Selection",
+    "Tags",
+  ]
 ---
 
 import { ChipSelectionGroup } from "./chip-selection-group";
 
-A component that does something special and renders text in a div.
+A chip selection group component to manage many options of chip selections.
 
 ### Component usage
 
 ```js
-<ChipSelectionGroup>Hello world!</ChipSelectionGroup>
+<ChipSelectionGroup
+  options={[
+    { label: "label 1", value: 1 },
+    { label: "label 2", value: 2 },
+  ]}
+/>
 ```
 
 ### Render hello world!

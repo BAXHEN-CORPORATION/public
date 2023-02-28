@@ -11,21 +11,15 @@
 {
     "chip-selection": {
         "scope": "baxhen.public",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "packages/chip-selection"
     },
     "chip-selection-group": {
-        "scope": "",
-        "version": "",
+        "scope": "baxhen.public",
+        "version": "0.0.2",
         "mainFile": "index.ts",
-        "rootDir": "packages/chip-selection-group",
-        "config": {
-            "teambit.react/react": {},
-            "teambit.envs/envs": {
-                "env": "teambit.react/react"
-            }
-        }
+        "rootDir": "packages/chip-selection-group"
     },
     "details": {
         "scope": "baxhen.public",
@@ -43,7 +37,13 @@
         "scope": "baxhen.public",
         "version": "0.0.5",
         "mainFile": "index.ts",
-        "rootDir": "packages/link-accordion"
+        "rootDir": "packages/link-accordion",
+        "nextVersion": {
+            "version": "patch",
+            "message": "refactor: add checked class when chip is checked",
+            "username": "beraby",
+            "email": "reboucas.beraby@gmail.com"
+        }
     },
     "typing": {
         "scope": "baxhen.public",
