@@ -13,7 +13,7 @@ export interface ChipSelectionClasses {
 export type ChipSelectionClassKey = keyof ChipSelectionClasses;
 
 export function getChipSelectionUtilityClass(slot: string): string {
-  return generateUtilityClass("BaxChipSelection", slot, "BaxChipSelection");
+  return generateUtilityClass("BaxChipSelection", slot, "Bax");
 }
 
 const chipSelectionClasses: ChipSelectionClasses = generateUtilityClasses(
