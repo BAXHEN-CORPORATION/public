@@ -17,10 +17,10 @@ declare module "@mui/material/styles" {
   interface ComponentNameToClassKey {
     BaxLinkAccordion: LinkAccordionClassKey;
   }
-  interface Components<Theme = unknown> {
+  interface Components {
     BaxLinkAccordion?: {
       defaultProps?: ComponentsProps["BaxLinkAccordion"];
-      styleOverrides?: ComponentsOverrides<Theme>["BaxLinkAccordion"];
+      styleOverrides?: ComponentsOverrides["BaxLinkAccordion"];
       variants?: ComponentsVariants["BaxLinkAccordion"];
     };
   }

@@ -19,10 +19,10 @@ declare module "@mui/material/styles" {
   interface ComponentNameToClassKey {
     BaxDetails: DetailsClassKey;
   }
-  interface Components<Theme = unknown> {
+  interface Components {
     BaxDetails?: {
       defaultProps?: ComponentsProps["BaxDetails"];
-      styleOverrides?: ComponentsOverrides<Theme>["BaxDetails"];
+      styleOverrides?: ComponentsOverrides["BaxDetails"];
       variants?: ComponentsVariants["BaxDetails"];
     };
   }

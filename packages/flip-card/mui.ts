@@ -1,12 +1,10 @@
-import { createTheme ,
+import {
+  createTheme,
   ComponentsProps,
   ComponentsOverrides,
   ComponentsVariants,
   Components,
 } from "@mui/material/styles";
-
-
-
 
 import { FlipCardProps } from "./flip-card";
 import { FlipCardClassKey } from "./flip-card-classes";
@@ -19,10 +17,10 @@ declare module "@mui/material/styles" {
   interface ComponentNameToClassKey {
     BaxFlipCard: FlipCardClassKey;
   }
-  interface Components<Theme = unknown> {
+  interface Components {
     BaxFlipCard?: {
       defaultProps?: ComponentsProps["BaxFlipCard"];
-      styleOverrides?: ComponentsOverrides<Theme>["BaxFlipCard"];
+      styleOverrides?: ComponentsOverrides["BaxFlipCard"];
       variants?: ComponentsVariants["BaxFlipCard"];
     };
   }
