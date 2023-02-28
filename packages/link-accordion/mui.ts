@@ -27,9 +27,15 @@ declare module "@mui/material/styles" {
 }
 
 export const Overrides = {
-  defaultProps: { color: "primary" },
+  defaultProps: { color: "secondary" },
   styleOverrides: {
     root: { backgroundColor: "blue" },
+    summary: { backgroundColor: "blue" },
+    summaryTitle: { backgroundColor: "blue" },
+    contentWrapper: { backgroundColor: "blue" },
+    linkWrapper: { backgroundColor: "blue" },
+    linkLabel: { backgroundColor: "blue" },
+    linkDetail: { backgroundColor: "blue" },
   },
 } as const;
 

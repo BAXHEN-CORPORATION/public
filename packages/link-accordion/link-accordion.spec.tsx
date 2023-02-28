@@ -4,12 +4,14 @@ import {
   BasicLinkAccordion,
   ErrorLinkAccordion,
   InfoLinkAccordion,
+  OverridesLinkAccordion,
   SecondaryLinkAccordion,
   SuccessLinkAccordion,
   WarningLinkAccordion,
 } from "./link-accordion.composition";
 import { links, title } from "./test/data";
 import linkAccordionClasses from "./link-accordion-classes";
+import { Overrides } from "./mui";
 
 it("should render with the correct title text", () => {
   const { getByText } = render(<BasicLinkAccordion />);
@@ -143,14 +145,66 @@ it("should render with the root and warning classes but no others", () => {
   expect(rendered).toHaveClass(linkAccordionClasses.warning);
 });
 
-it.todo(
-  "should receive styles from the theme for the LinkAccordionRoot component"
-);
-it.todo("should receive styles from the theme for the Summary component");
-it.todo("should receive styles from the theme for the SummaryTitle component");
-it.todo(
-  "should receive styles from the theme for the ContentWrapper component"
-);
-it.todo("should receive styles from the theme for the LinkWrapper component");
-it.todo("should receive styles from the theme for the LinkLabel component");
-it.todo("should receive styles from the theme for the LinkDetail component");
+it("should receive styles from the theme for the LinkAccordionRoot component", () => {
+  const { getByTestId } = render(<OverridesLinkAccordion />);
+  const rendered = getByTestId("LinkAccordion");
+
+  expect(rendered).toHaveStyle(
+    `background-color:${Overrides.styleOverrides.root.backgroundColor}`
+  );
+});
+it("should receive styles from the theme for the Summary component", () => {
+  const { getByTestId } = render(<OverridesLinkAccordion />);
+  const rendered = getByTestId("Summary");
+
+  expect(rendered).toHaveStyle(
+    `background-color:${Overrides.styleOverrides.summary.backgroundColor}`
+  );
+});
+it("should receive styles from the theme for the SummaryTitle component", () => {
+  const { getByTestId } = render(<OverridesLinkAccordion />);
+  const rendered = getByTestId("SummaryTitle");
+
+  expect(rendered).toHaveStyle(
+    `background-color:${Overrides.styleOverrides.summaryTitle.backgroundColor}`
+  );
+});
+it("should receive styles from the theme for the ContentWrapper component", () => {
+  const { getByTestId } = render(<OverridesLinkAccordion />);
+  const rendered = getByTestId("ContentWrapper");
+
+  expect(rendered).toHaveStyle(
+    `background-color:${Overrides.styleOverrides.contentWrapper.backgroundColor}`
+  );
+});
+it("should receive styles from the theme for the LinkWrapper component", () => {
+  const { getAllByTestId } = render(<OverridesLinkAccordion />);
+  const rendered = getAllByTestId("LinkWrapper");
+
+  rendered.forEach((element) => {
+    expect(element).toHaveStyle(
+      `background-color:${Overrides.styleOverrides.linkWrapper.backgroundColor}`
+    );
+  });
+});
+
+it("should receive styles from the theme for the LinkLabel component", () => {
+  const { getAllByTestId } = render(<OverridesLinkAccordion />);
+  const rendered = getAllByTestId("LinkLabel");
+
+  rendered.forEach((element) => {
+    expect(element).toHaveStyle(
+      `background-color:${Overrides.styleOverrides.linkLabel.backgroundColor}`
+    );
+  });
+});
+it("should receive styles from the theme for the LinkDetail component", () => {
+  const { getAllByTestId } = render(<OverridesLinkAccordion />);
+  const rendered = getAllByTestId("LinkDetail");
+
+  rendered.forEach((element) => {
+    expect(element).toHaveStyle(
+      `background-color:${Overrides.styleOverrides.linkDetail.backgroundColor}`
+    );
+  });
+});

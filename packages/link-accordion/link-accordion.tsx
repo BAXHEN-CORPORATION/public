@@ -170,7 +170,11 @@ export function LinkAccordion(inProps: LinkAccordionProps) {
       data-testid="LinkAccordion"
     >
       <Summary className={classes.summary} data-testid="Summary">
-        <SummaryTitle ownerState={ownerState} className={classes.summaryTitle}>
+        <SummaryTitle
+          data-testid="SummaryTitle"
+          ownerState={ownerState}
+          className={classes.summaryTitle}
+        >
           {title}
         </SummaryTitle>{" "}
         <Icon
@@ -178,14 +182,19 @@ export function LinkAccordion(inProps: LinkAccordionProps) {
           sx={{ color: (theme) => theme.palette[color].light }}
         />
       </Summary>
-      <ContentWrapper className={classes.contentWrapper}>
+      <ContentWrapper
+        data-testid="ContentWrapper"
+        className={classes.contentWrapper}
+      >
         {links.map((link) => {
           return (
             <LinkWrapper
               key={link.detail + link.label}
               className={classes.linkWrapper}
+              data-testid="LinkWrapper"
             >
               <LinkLabel
+                data-testid="LinkLabel"
                 ownerState={ownerState}
                 className={classes.linkLabel}
                 onClick={() => {
@@ -195,6 +204,7 @@ export function LinkAccordion(inProps: LinkAccordionProps) {
                 {link.label}
               </LinkLabel>{" "}
               <LinkDetail
+                data-testid="LinkDetail"
                 className={classes.linkDetail}
                 ownerState={ownerState}
               >

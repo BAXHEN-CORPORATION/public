@@ -18,14 +18,18 @@ export interface LinkAccordionClasses {
   info: string;
   /** Styles applied to the root element if `color="warning"`. */
   warning: string;
-  // /** Styles applied to the summary element. */
-  // summary: string;
-  // /** Styles applied to the summary title element. */
-  // summaryTitle: string;
-  // /** Styles applied to the content wrapper element. */
-  // contentWrapper: string;
-  // /** Styles applied to the content text element. */
-  // contentText: string;
+  /** Styles applied to the summary element. */
+  summary: string;
+  /** Styles applied to the summary title element. */
+  summaryTitle: string;
+  /** Styles applied to the content wrapper element. */
+  contentWrapper: string;
+  /** Styles applied to the link wrapper element. */
+  linkWrapper: string;
+  /** Styles applied to the link label element. */
+  linkLabel: string;
+  /** Styles applied to the link detail element. */
+  linkDetail: string;
 }
 
 export type LinkAccordionClassKey = keyof LinkAccordionClasses;
@@ -44,10 +48,12 @@ const linkAccordionClasses: LinkAccordionClasses = generateUtilityClasses(
     "success",
     "warning",
     "info",
-    // "summary",
-    // "summaryTitle",
-    // "contentWrapper",
-    // "contentText",
+    "summary",
+    "summaryTitle",
+    "contentWrapper",
+    "linkWrapper",
+    "linkLabel",
+    "linkDetail",
   ],
   "Bax"
 );

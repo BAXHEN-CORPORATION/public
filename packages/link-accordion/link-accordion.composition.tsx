@@ -1,6 +1,6 @@
 import React from "react";
 import { LinkAccordion } from "./link-accordion";
-import { Wrapper, links, title } from "./test";
+import { Wrapper, links, title, WrapperOverrides } from "./test";
 
 export const BasicLinkAccordion = ({ onLinkClick = () => {} }) => {
   return (
@@ -47,5 +47,12 @@ export const WarningLinkAccordion = () => {
     <Wrapper>
       <LinkAccordion title={title} links={links} color="warning" />
     </Wrapper>
+  );
+};
+export const OverridesLinkAccordion = () => {
+  return (
+    <WrapperOverrides>
+      <LinkAccordion title={title} links={links} color="warning" />
+    </WrapperOverrides>
   );
 };

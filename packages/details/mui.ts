@@ -1,12 +1,12 @@
-import { createTheme, Components ,
+import {
+  createTheme,
+  Components,
   ComponentsProps,
   ComponentsOverrides,
   ComponentsVariants,
 } from "@mui/material/styles";
 
-
 import "@mui/material";
-
 
 import { DetailsProps } from "./details";
 import { DetailsClassKey } from "./details-classes";
@@ -45,6 +45,6 @@ export const theme = createTheme();
 export const themeOverrides = createTheme({
   palette: { primary: { main: "#FF0000" } },
   components: {
-    BaxDetails,
+    BaxDetails: { ...BaxDetails },
   },
 });
