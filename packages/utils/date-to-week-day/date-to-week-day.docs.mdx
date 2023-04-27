@@ -1,10 +1,10 @@
 ---
-labels: ['module']
-description: 'A general purpose node module'
+labels: ["module", "date", "formatter"]
+description: "A date formatter node module that gets the weekday of the date and return it according to the options"
 ---
 
 API:
 
 ```ts
-function dateToWeekDay(): string;
+function dateToWeekDay(new Date(),{weekday:'short', locale:'pt-BR'}): string;
 ```

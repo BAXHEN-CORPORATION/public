@@ -31,3 +31,5 @@ export const dateToWeekDay: DateToWeekDayFunction = (
     weekday,
   });
 };
+
+export default dateToWeekDay;

@@ -11,7 +11,7 @@ describe("dateToWeekDay", () => {
   });
 
   it('should return a string representing the date in the default locale ("pt-BR") when only the first argument is provided', () => {
-    // expect(dateToWeekDay(new Date("2023-04-26"))).toBe("26/04/2023");
+    expect(dateToWeekDay(new Date("2023-04-26"))).toBe("26/04/2023");
   });
 
   it("should return a string representing the date in the specified locale when the second argument is a string", () => {
