@@ -51,5 +51,17 @@
         "mainFile": "index.ts",
         "rootDir": "packages/typing"
     },
+    "utils/date-to-week-day": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "packages/utils/date-to-week-day",
+        "config": {
+            "teambit.harmony/node": {},
+            "teambit.envs/envs": {
+                "env": "teambit.harmony/node"
+            }
+        }
+    },
     "$schema-version": "15.0.0"
 }
