@@ -52,16 +52,10 @@
         "rootDir": "packages/typing"
     },
     "utils/date-to-week-day": {
-        "scope": "",
-        "version": "",
+        "scope": "baxhen.public",
+        "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "packages/utils/date-to-week-day",
-        "config": {
-            "teambit.harmony/node": {},
-            "teambit.envs/envs": {
-                "env": "teambit.harmony/node"
-            }
-        }
+        "rootDir": "packages/utils/date-to-week-day"
     },
     "$schema-version": "15.0.0"
 }
