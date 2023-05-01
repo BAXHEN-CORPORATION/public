@@ -1,20 +1,25 @@
 import React, { ReactNode } from "react";
 
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+
 export type FancyUploadModalProps = {
   /**
    * a node to be rendered in the special component.
    */
-  children?: ReactNode;
+  open: boolean;
 };
 
-export function FancyUploadModal({ children }: FancyUploadModalProps) {
+export function FancyUploadModal({ open }: FancyUploadModalProps) {
   return (
-    
+    <Modal open={open}>
+      <Box>Upload a File</Box>
+    </Modal>
   );
 }
 
-
-{/* <div id="upload" className="modal" data-state="0" data-ready="false">
+{
+  /* <div id="upload" className="modal" data-state="0" data-ready="false">
       <div className="modal__header">
         <button className="modal__close-button" type="button">
           <svg
@@ -280,4 +285,5 @@ export function FancyUploadModal({ children }: FancyUploadModalProps) {
           </div>
         </div>
       </div>
-    </div> */}
+    </div> */
+}
