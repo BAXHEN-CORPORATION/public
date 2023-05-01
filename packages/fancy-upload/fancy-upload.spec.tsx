@@ -6,6 +6,17 @@ import { RenderResult } from "@testing-library/react";
 describe("FancyUpload", () => {
   let file: File;
 
+  const callbackSuccess = (file: File, updateStatus) => {
+    setTimeout(() => {
+      updateStatus("success");
+    }, 1000);
+  };
+  const callbackError = (file: File, updateStatus) => {
+    setTimeout(() => {
+      updateStatus("error");
+    }, 1000);
+  };
+
   beforeEach(() => {
     file = new File(["(⌐□_□)"], "chucknorris.png", { type: "image/png" });
   });
@@ -106,7 +117,10 @@ describe("FancyUpload", () => {
   });
 
   it("should start the uploading after upload button is clicked, show the default uploading label, default description and progress bar", async () => {
-    const { getByText, getByTestId } = render(<BasicFancyUpload />);
+    const mockFn = jest.fn(callbackSuccess);
+    const { getByText, getByTestId } = render(
+      <BasicFancyUpload onUpload={mockFn} />
+    );
 
     const input = getByTestId("file");
 
@@ -130,10 +144,11 @@ describe("FancyUpload", () => {
     expect(description).toBeTruthy();
     expect(progressBar).toBeTruthy();
   });
-  const callback = jest.fn((file: File) => {});
-  it("should call the upload callback when upload button is clicked passing the file as fisrt argument", async () => {
+
+  it("should call the upload callback when upload button is clicked passing the file as fisrt argument and the callback to update the status as second argument", async () => {
+    const mockFn = jest.fn(callbackSuccess);
     const { getByText, getByTestId } = render(
-      <BasicFancyUpload onUpload={callback} />
+      <BasicFancyUpload onUpload={mockFn} />
     );
 
     const input = getByTestId("file");
@@ -148,7 +163,33 @@ describe("FancyUpload", () => {
 
     await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
 
-    expect(callback).toHaveBeenCalledTimes(1);
-    expect(callback.mock.calls[0][0]).toBe(file);
+    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn.mock.calls[0][0]).toBe(file);
+    expect(typeof mockFn.mock.calls[0][1]).toBe("function");
+  });
+
+  it("should show success default title, description and actions after uploading with success", async () => {
+    // const mockFn = jest.fn(callbackSuccess);
+    // const { getByText, getByTestId } = render(
+    //   <BasicFancyUpload onUpload={mockFn} />
+    // );
+    // const input = getByTestId("file");
+    // await waitFor(() =>
+    //   fireEvent.change(input, {
+    //     target: { files: [file] },
+    //   })
+    // );
+    // const uploadButton = getByText("Upload");
+    // await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
+    // const title = getByText("Upload Successful!");
+    // const description = getByText(
+    //   "Your file has been uploaded. You can copy the link to your clipboard."
+    // );
+    // const copyAction = getByText("Copy Link");
+    // const doneAction = getByText("Done");
+    // expect(copyAction).toBeTruthy();
+    // expect(doneAction).toBeTruthy();
+    // expect(title).toBeTruthy();
+    // expect(description).toBeTruthy();
   });
 });

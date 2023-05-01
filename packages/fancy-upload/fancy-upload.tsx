@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 
-import { useFancyUpload } from "./use-fancy-upload";
+import { FancyUploadCallbackStatus, useFancyUpload } from "./use-fancy-upload";
 import { LinearProgressProps } from "@mui/material/LinearProgress";
 import LinearProgress from "@mui/material/LinearProgress";
 
@@ -31,7 +31,11 @@ function LinearProgressWithLabel(
 }
 
 export interface FancyUploadProps {
-  onUpload: (file: File) => void;
+  onUpload: (
+    file: File,
+    updateStatus: (status: FancyUploadCallbackStatus) => void
+  ) => void;
+  progress: number;
 }
 
 export function FancyUpload(props: FancyUploadProps) {
@@ -43,6 +47,7 @@ export function FancyUpload(props: FancyUploadProps) {
     onResetFile,
     status,
     onUpload,
+    progress,
   } = useFancyUpload(props);
 
   if (status === "choose-file")
@@ -99,7 +104,29 @@ export function FancyUpload(props: FancyUploadProps) {
 
         <Typography>Uploading...</Typography>
         <Typography>Just give us a moment to process your file.</Typography>
-        <LinearProgressWithLabel data-testid="progress-bar" value={20} />
+        <LinearProgressWithLabel data-testid="progress-bar" value={progress} />
+      </Box>
+    );
+  }
+  if (status === "error") {
+    return (
+      <Box minWidth="768px">
+        <CloudUploadIcon />
+
+        <Typography>{status}</Typography>
+        <Typography>Just give us a moment to process your file.</Typography>
+        <LinearProgressWithLabel data-testid="progress-bar" value={progress} />
+      </Box>
+    );
+  }
+  if (status === "success") {
+    return (
+      <Box minWidth="768px">
+        <CloudUploadIcon />
+
+        <Typography>{status}</Typography>
+        <Typography>Just give us a moment to process your file.</Typography>
+        <LinearProgressWithLabel data-testid="progress-bar" value={progress} />
       </Box>
     );
   }
