@@ -324,5 +324,38 @@ describe("FancyUpload", () => {
 
     expect(mockFn.mock.calls.length).toBe(2);
   });
-  it.todo("should call the done callback when clicked");
+  it("should call the done callback when clicked", async () => {
+    const mockFn = jest.fn(callbackError);
+    const { getByText, getByTestId, findByText } = render(
+      <BasicFancyUpload onUpload={mockFn} />
+    );
+
+    const input = getByTestId("file");
+
+    await waitFor(() =>
+      fireEvent.change(input, {
+        target: { files: [file] },
+      })
+    );
+
+    const uploadButton = getByText("Upload");
+
+    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
+
+    await waitFor(async () => findByText("Oops!"));
+
+    const action = getByText("Cancel");
+
+    action.click();
+
+    await waitFor(async () => findByText("Choose File"));
+
+    const title = getByText(/Choose File/);
+    const description = getByText("Select a file to upload from your computer");
+
+    expect(title).toBeTruthy();
+    expect(description).toBeTruthy();
+
+    expect(mockFn.mock.calls.length).toBe(5);
+  });
 });
