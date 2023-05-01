@@ -6,9 +6,15 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
+import { useFancyUpload } from "./use-fancy-upload";
+
 export interface FancyUploadProps {}
 
 export function FancyUpload({}: FancyUploadProps) {
+  const { fileRef, onChooseFile, files, onFileChange } = useFancyUpload();
+
+  console.log({ files });
+
   return (
     <Box minWidth="768px">
       <CloudUploadIcon />
@@ -16,7 +22,14 @@ export function FancyUpload({}: FancyUploadProps) {
       <Typography>Upload a File</Typography>
       <Typography>Select a file to upload from your computer</Typography>
 
-      <Button>Choose File</Button>
+      {!files && <Button onClick={onChooseFile}>Choose File</Button>}
+      <input
+        type="file"
+        data-testid="file"
+        ref={fileRef}
+        hidden
+        onChange={onFileChange}
+      />
     </Box>
   );
 }

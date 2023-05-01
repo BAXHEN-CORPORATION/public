@@ -3,6 +3,12 @@ import { render, fireEvent, waitFor } from "@testing-library/react";
 import { BasicFancyUpload } from "./fancy-upload.composition";
 
 describe("FancyUpload", () => {
+  let file;
+
+  beforeEach(() => {
+    file = new File(["(⌐□_□)"], "chucknorris.png", { type: "image/png" });
+  });
+
   it("should render with the correct default title", () => {
     const { getByText } = render(<BasicFancyUpload />);
     const rendered = getByText("Upload a File");
@@ -28,19 +34,17 @@ describe("FancyUpload", () => {
   });
 
   it("should hide the choose file button after choosing a file", async () => {
-    const file = new File(["(⌐□_□)"], "chucknorris.png", { type: "image/png" });
-    const { getByText, getByTestId } = render(<BasicFancyUpload />);
-    const rendered = getByText(/Choose File/);
+    const { queryByText, getByTestId } = render(<BasicFancyUpload />);
+
+    const input = getByTestId("file");
 
     await waitFor(() =>
-      fireEvent.change(rendered, {
+      fireEvent.change(input, {
         target: { files: [file] },
       })
     );
 
-    const renderedAfterChoosing = getByText(/Choose File/);
-
-    expect(renderedAfterChoosing).not.toBeTruthy();
+    expect(queryByText(/Choose File/)).toBeNull();
 
     // const uploadedFile = getByText("chucknorris.png");
 
