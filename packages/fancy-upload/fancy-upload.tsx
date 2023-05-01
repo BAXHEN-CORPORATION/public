@@ -13,6 +13,7 @@ export function FancyUpload({}: FancyUploadProps) {
       <CloudUploadIcon />
 
       <Typography>Upload a File</Typography>
+      <Typography>Select a file to upload from your computer</Typography>
     </Box>
   );
 }
