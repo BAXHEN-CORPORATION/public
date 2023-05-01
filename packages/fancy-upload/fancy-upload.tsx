@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";

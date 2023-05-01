@@ -1,9 +1,10 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { BasicFancyUpload } from "./fancy-upload.composition";
+import { RenderResult } from "@testing-library/react";
 
 describe("FancyUpload", () => {
-  let file;
+  let file: File;
 
   beforeEach(() => {
     file = new File(["(⌐□_□)"], "chucknorris.png", { type: "image/png" });
@@ -53,9 +54,23 @@ describe("FancyUpload", () => {
     // expect(input.files?.[0].name).toBe("chucknorris.png");
     // expect(input.files?.length).toBe(1);
   });
-  it.todo(
-    "should show the filename and the default icon after choosing a file"
-  );
+  it("should show the filename and the default icon after choosing a file", async () => {
+    const { getByText, getByTestId } = render(<BasicFancyUpload />);
+
+    const input = getByTestId("file");
+
+    await waitFor(() =>
+      fireEvent.change(input, {
+        target: { files: [file] },
+      })
+    );
+
+    const fileIcon = getByTestId("InsertDriveFileIcon");
+    const rendered = getByText(file.name);
+
+    expect(fileIcon).toBeTruthy();
+    expect(rendered).toBeTruthy();
+  });
   it.todo(
     "should show a cancel icon after choosing a file which when clicked remove the selected file"
   );
