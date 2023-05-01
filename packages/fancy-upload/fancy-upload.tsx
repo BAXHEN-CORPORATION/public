@@ -10,6 +10,8 @@ export interface FancyUploadProps {}
 export function FancyUpload({}: FancyUploadProps) {
   return (
     <Box minWidth="768px">
+      <CloudUploadIcon />
+
       <Typography>Upload a File</Typography>
     </Box>
   );
