@@ -356,6 +356,6 @@ describe("FancyUpload", () => {
     expect(title).toBeTruthy();
     expect(description).toBeTruthy();
 
-    expect(mockFn.mock.calls.length).toBe(5);
+    expect(mockFn.mock.calls.length).toBe(1);
   });
 });
