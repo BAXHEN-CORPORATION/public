@@ -2,10 +2,12 @@ import React, { ReactNode } from "react";
 
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import CloseIcon from "@mui/icons-material/Close";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 
 import { useFancyUpload } from "./use-fancy-upload";
 
@@ -13,8 +15,6 @@ export interface FancyUploadProps {}
 
 export function FancyUpload({}: FancyUploadProps) {
   const { fileRef, onChooseFile, files, onFileChange } = useFancyUpload();
-
-  console.log({ files });
 
   return (
     <Box minWidth="768px">
@@ -31,6 +31,16 @@ export function FancyUpload({}: FancyUploadProps) {
         hidden
         onChange={onFileChange}
       />
+
+      {files && (
+        <Box>
+          <InsertDriveFileIcon />
+          <Typography>{files[0].name}</Typography>
+          <IconButton>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+      )}
     </Box>
   );
 }
