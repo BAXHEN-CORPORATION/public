@@ -44,8 +44,8 @@ export const useFancyUpload = ({
   };
 
   const onUploadDone = () => {
-    // onResetFile();
-    // if (onDone) onDone();
+    onResetFile();
+    if (onDone) onDone();
   };
 
   const onUploadFile = () => {
