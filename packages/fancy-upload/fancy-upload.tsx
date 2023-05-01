@@ -39,6 +39,7 @@ export interface FancyUploadProps {
   ) => void;
   progress: number;
   onDone?: () => void;
+  onCopy: () => void;
 }
 
 export function FancyUpload(props: FancyUploadProps) {
@@ -52,6 +53,7 @@ export function FancyUpload(props: FancyUploadProps) {
     onUpload,
     progress,
     onUploadDone,
+    onLinkCopy,
   } = useFancyUpload(props);
 
   if (status === "choose-file")
@@ -136,7 +138,7 @@ export function FancyUpload(props: FancyUploadProps) {
         <Typography>
           Your file has been uploaded. You can copy the link to your clipboard.
         </Typography>
-        <Button>Copy Link</Button>
+        <Button onClick={onLinkCopy}>Copy Link</Button>
         <Button onClick={onUploadDone}>Done</Button>
       </Box>
     );

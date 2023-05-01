@@ -13,6 +13,7 @@ export const useFancyUpload = ({
   onUpload,
   onDone,
   progress,
+  onCopy,
 }: FancyUploadProps) => {
   const fileRef = React.useRef<HTMLInputElement>(null);
   const [files, setFiles] = React.useState<FileList | null>(null);
@@ -53,6 +54,9 @@ export const useFancyUpload = ({
     onUpload(files[0], setStatus);
   };
 
+  const onLinkCopy = () => {
+    onCopy();
+  };
   return {
     fileRef,
     onChooseFile,
@@ -63,5 +67,6 @@ export const useFancyUpload = ({
     onUpload: onUploadFile,
     progress,
     onUploadDone,
+    onLinkCopy,
   };
 };
