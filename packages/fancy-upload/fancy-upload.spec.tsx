@@ -170,7 +170,7 @@ describe("FancyUpload", () => {
 
   it("should show success default title, description and actions after uploading with success", async () => {
     const mockFn = jest.fn(callbackSuccess);
-    const { getByText, getByTestId } = render(
+    const { getByText, getByTestId, findByText } = render(
       <BasicFancyUpload onUpload={mockFn} />
     );
 
@@ -185,6 +185,8 @@ describe("FancyUpload", () => {
     const uploadButton = getByText("Upload");
 
     await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
+
+    await waitFor(async () => findByText("Upload Successful!"));
 
     const title = getByText("Upload Successful!");
     const description = getByText(

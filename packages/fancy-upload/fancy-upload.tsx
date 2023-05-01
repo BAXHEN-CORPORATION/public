@@ -124,9 +124,12 @@ export function FancyUpload(props: FancyUploadProps) {
       <Box minWidth="768px">
         <CloudUploadIcon />
 
-        <Typography>{status}</Typography>
-        <Typography>Just give us a moment to process your file.</Typography>
-        <LinearProgressWithLabel data-testid="progress-bar" value={progress} />
+        <Typography>Upload Successful!</Typography>
+        <Typography>
+          Your file has been uploaded. You can copy the link to your clipboard.
+        </Typography>
+        <Button>Copy Link</Button>
+        <Button>Done</Button>
       </Box>
     );
   }
