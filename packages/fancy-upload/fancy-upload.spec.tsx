@@ -201,4 +201,37 @@ describe("FancyUpload", () => {
     expect(title).toBeTruthy();
     expect(description).toBeTruthy();
   });
+  it("should show error default title, description and actions after uploading with success", async () => {
+    const mockFn = jest.fn(callbackError);
+    const { getByText, getByTestId, findByText } = render(
+      <BasicFancyUpload onUpload={mockFn} />
+    );
+
+    const input = getByTestId("file");
+
+    await waitFor(() =>
+      fireEvent.change(input, {
+        target: { files: [file] },
+      })
+    );
+
+    const uploadButton = getByText("Upload");
+
+    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
+
+    await waitFor(async () => findByText("Oops!"));
+
+    const title = getByText("Oops");
+    const description = getByText(
+      "Your file could not be uploaded due to an error. Try uploading it again?"
+    );
+
+    const copyAction = getByText("Retry");
+    const doneAction = getByText("Cancel");
+
+    expect(copyAction).toBeTruthy();
+    expect(doneAction).toBeTruthy();
+    expect(title).toBeTruthy();
+    expect(description).toBeTruthy();
+  });
 });
