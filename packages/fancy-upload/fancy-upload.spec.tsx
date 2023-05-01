@@ -14,9 +14,16 @@ describe("FancyUpload", () => {
     const rendered = getByTestId("CloudUploadIcon");
     expect(rendered).toBeTruthy();
   });
+
   it("should render with the correct default description", () => {
     const { getByText } = render(<BasicFancyUpload />);
     const rendered = getByText(/Select a file/);
+    expect(rendered).toBeTruthy();
+  });
+
+  it("should render a button with the correct default label", () => {
+    const { getByText } = render(<BasicFancyUpload />);
+    const rendered = getByText(/Choose File/);
     expect(rendered).toBeTruthy();
   });
 });
