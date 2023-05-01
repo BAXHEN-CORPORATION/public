@@ -298,8 +298,31 @@ describe("FancyUpload", () => {
     expect(description).toBeTruthy();
   });
 
-  it.todo(
-    "should call the upload callback again when the retry button is clicked"
-  );
+  it("should call the upload callback again when the retry button is clicked", async () => {
+    const mockFn = jest.fn(callbackError);
+    const { getByText, getByTestId, findByText } = render(
+      <BasicFancyUpload onUpload={mockFn} />
+    );
+
+    const input = getByTestId("file");
+
+    await waitFor(() =>
+      fireEvent.change(input, {
+        target: { files: [file] },
+      })
+    );
+
+    const uploadButton = getByText("Upload");
+
+    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
+
+    await waitFor(async () => findByText("Oops!"));
+
+    const retryAction = getByText("Retry");
+
+    retryAction.click();
+
+    expect(mockFn.mock.calls.length).toBe(2);
+  });
   it.todo("should call the done callback when clicked");
 });
