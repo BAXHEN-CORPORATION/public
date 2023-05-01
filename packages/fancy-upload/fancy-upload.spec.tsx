@@ -201,7 +201,39 @@ describe("FancyUpload", () => {
     expect(title).toBeTruthy();
     expect(description).toBeTruthy();
   });
-  it("should show error default title, description and actions after uploading with success", async () => {
+
+  it("should call the copy callback when clicked", async () => {
+    const mockFn = jest.fn(callbackSuccess);
+    const mockCopyFn = jest.fn(() => {});
+    const { getByText, getByTestId, findByText } = render(
+      <BasicFancyUpload onUpload={mockFn} onCopy={mockCopyFn} />
+    );
+
+    const input = getByTestId("file");
+
+    await waitFor(() =>
+      fireEvent.change(input, {
+        target: { files: [file] },
+      })
+    );
+
+    const uploadButton = getByText("Upload");
+
+    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
+
+    await waitFor(async () => findByText("Upload Successful!"));
+
+    const copyAction = getByText("Copy Link");
+
+    copyAction.click();
+
+    expect(mockCopyFn.mock.calls.length).toBe(1);
+  });
+  it.todo(
+    "should call the done callback when clicked and show title, description and button to choose a file"
+  );
+
+  it("should show error default title, description and actions after uploading with error", async () => {
     const mockFn = jest.fn(callbackError);
     const { getByText, getByTestId, findByText } = render(
       <BasicFancyUpload onUpload={mockFn} />
@@ -226,12 +258,17 @@ describe("FancyUpload", () => {
       "Your file could not be uploaded due to an error. Try uploading it again?"
     );
 
-    const copyAction = getByText("Retry");
-    const doneAction = getByText("Cancel");
+    const retryAction = getByText("Retry");
+    const cancelAction = getByText("Cancel");
 
-    expect(copyAction).toBeTruthy();
-    expect(doneAction).toBeTruthy();
+    expect(retryAction).toBeTruthy();
+    expect(cancelAction).toBeTruthy();
     expect(title).toBeTruthy();
     expect(description).toBeTruthy();
   });
+
+  it.todo(
+    "should call the upload callback again when the retry button is clicked"
+  );
+  it.todo("should call the done callback when clicked");
 });

@@ -9,7 +9,11 @@ export type FancyUploadStatus =
   | "selected-file"
   | FancyUploadCallbackStatus;
 
-export const useFancyUpload = ({ onUpload, progress }: FancyUploadProps) => {
+export const useFancyUpload = ({
+  onUpload,
+  onDone,
+  progress,
+}: FancyUploadProps) => {
   const fileRef = React.useRef<HTMLInputElement>(null);
   const [files, setFiles] = React.useState<FileList | null>(null);
   const [status, setStatus] = React.useState<FancyUploadStatus>("choose-file");
@@ -31,11 +35,16 @@ export const useFancyUpload = ({ onUpload, progress }: FancyUploadProps) => {
   const onResetFile = () => {
     setFiles(null);
 
+    setStatus("choose-file");
+
     if (!fileRef.current) return;
 
     fileRef.current.value = "";
+  };
 
-    setStatus("choose-file");
+  const onUploadDone = () => {
+    onResetFile();
+    if (onDone) onDone();
   };
 
   const onUploadFile = () => {
@@ -53,5 +62,6 @@ export const useFancyUpload = ({ onUpload, progress }: FancyUploadProps) => {
     status,
     onUpload: onUploadFile,
     progress,
+    onUploadDone,
   };
 };

@@ -38,6 +38,7 @@ export interface FancyUploadProps {
     updateStatus: (status: FancyUploadCallbackStatus) => void
   ) => void;
   progress: number;
+  onDone?: () => void;
 }
 
 export function FancyUpload(props: FancyUploadProps) {
@@ -50,6 +51,7 @@ export function FancyUpload(props: FancyUploadProps) {
     status,
     onUpload,
     progress,
+    onUploadDone,
   } = useFancyUpload(props);
 
   if (status === "choose-file")
@@ -120,7 +122,7 @@ export function FancyUpload(props: FancyUploadProps) {
           Your file could not be uploaded due to an error. Try uploading it
           again?
         </Typography>
-        <Button>Retry</Button>
+        <Button onClick={onUpload}>Retry</Button>
         <Button onClick={onResetFile}>Cancel</Button>
       </Box>
     );
@@ -135,7 +137,7 @@ export function FancyUpload(props: FancyUploadProps) {
           Your file has been uploaded. You can copy the link to your clipboard.
         </Typography>
         <Button>Copy Link</Button>
-        <Button>Done</Button>
+        <Button onClick={onUploadDone}>Done</Button>
       </Box>
     );
   }
