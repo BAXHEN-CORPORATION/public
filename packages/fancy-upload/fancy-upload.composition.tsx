@@ -28,3 +28,30 @@ export const BasicFancyUpload = (args: Partial<FancyUploadProps>) => {
 
   return <FancyUpload {...props} />;
 };
+export const ErrorFancyUpload = (args: Partial<FancyUploadProps>) => {
+  const [progress, setProgress] = React.useState(1);
+
+  const onUpload: FancyUploadProps["onUpload"] = async (file, updateStatus) => {
+    return new Promise((resolve) => {
+      const timerId = setInterval(() => {
+        setProgress((old) => {
+          if (old < 50) {
+            return old + 1;
+          }
+
+          clearInterval(timerId);
+          updateStatus("error");
+          resolve();
+
+          return 1;
+        });
+      }, 50);
+    });
+  };
+
+  const onCopy = () => {};
+
+  const props: FancyUploadProps = { onUpload, progress, onCopy, ...args };
+
+  return <FancyUpload {...props} />;
+};
