@@ -4,26 +4,27 @@ import { FancyUpload, FancyUploadProps } from "./fancy-upload";
 export const BasicFancyUpload = (args: Partial<FancyUploadProps>) => {
   const [progress, setProgress] = React.useState(1);
 
-  const onUpload: FancyUploadProps["onUpload"] = (file, updateStatus) => {
-    if (Math.random() * 10 > 5) {
-      updateStatus("error");
-      return;
-    }
-    const timerId = setInterval(() => {
-      setProgress((old) => {
-        if (old < 100) {
-          return old + 1;
-        }
+  const onUpload: FancyUploadProps["onUpload"] = async (file, updateStatus) => {
+    return new Promise((resolve) => {
+      const timerId = setInterval(() => {
+        setProgress((old) => {
+          if (old < 100) {
+            return old + 1;
+          }
 
-        clearInterval(timerId);
+          clearInterval(timerId);
+          updateStatus("success");
+          resolve();
 
-        updateStatus("success");
-        return 100;
-      });
-    }, 50);
+          return 100;
+        });
+      }, 50);
+    });
   };
 
-  const props: FancyUploadProps = { onUpload, progress, ...args };
+  const onCopy = () => {};
+
+  const props: FancyUploadProps = { onUpload, progress, onCopy, ...args };
 
   return <FancyUpload {...props} />;
 };
