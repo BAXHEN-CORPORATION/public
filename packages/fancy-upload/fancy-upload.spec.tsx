@@ -104,7 +104,28 @@ describe("FancyUpload", () => {
     expect(closeIcon).toBeNull();
     expect(rendered).toBeNull();
   });
-  it.todo(
-    "should show a upload button choosing a file which when clicked call the upload callback passing the selected files"
-  );
+
+  it("should start the uploading after upload button is clicked, show the default uploading label, default description and progress bar", async () => {
+    const { getByText, getByTestId } = render(<BasicFancyUpload />);
+
+    const input = getByTestId("file");
+
+    await waitFor(() =>
+      fireEvent.change(input, {
+        target: { files: [file] },
+      })
+    );
+
+    const uploadButton = getByText("Upload");
+
+    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
+
+    const title = getByText("Uploading...");
+    const description = getByText(/Just give us a moment/);
+    const progressBar = getByTestId("progess-bar");
+
+    expect(title).toBeTruthy();
+    expect(description).toBeTruthy();
+    expect(progressBar).toBeTruthy();
+  });
 });
