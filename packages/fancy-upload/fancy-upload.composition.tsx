@@ -1,6 +1,8 @@
 import React from "react";
-import { FancyUpload } from "./fancy-upload";
+import { FancyUpload, FancyUploadProps } from "./fancy-upload";
 
-export const BasicFancyUpload = () => {
-  return <FancyUpload />;
+export const BasicFancyUpload = (args: Partial<FancyUploadProps>) => {
+  const props: FancyUploadProps = { onUpload: (file) => {}, ...args };
+
+  return <FancyUpload {...props} />;
 };

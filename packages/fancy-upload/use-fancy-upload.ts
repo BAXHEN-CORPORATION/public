@@ -1,5 +1,7 @@
 import React, { ChangeEventHandler } from "react";
 
+import { FancyUploadProps } from "./fancy-upload";
+
 export type FancyUploadStatus =
   | "choose-file"
   | "error"
@@ -7,7 +9,7 @@ export type FancyUploadStatus =
   | "uploading"
   | "selected-file";
 
-export const useFancyUpload = () => {
+export const useFancyUpload = ({ onUpload }: FancyUploadProps) => {
   const fileRef = React.useRef<HTMLInputElement>(null);
   const [files, setFiles] = React.useState<FileList | null>(null);
   const [status, setStatus] = React.useState<FancyUploadStatus>("choose-file");
@@ -36,8 +38,10 @@ export const useFancyUpload = () => {
     setStatus("choose-file");
   };
 
-  const onUpload = () => {
+  const onUploadFile = () => {
+    if (!files) return;
     setStatus("uploading");
+    onUpload(files[0]);
   };
 
   return {
@@ -47,6 +51,6 @@ export const useFancyUpload = () => {
     files,
     onResetFile,
     status,
-    onUpload,
+    onUpload: onUploadFile,
   };
 };

@@ -30,9 +30,11 @@ function LinearProgressWithLabel(
   );
 }
 
-export interface FancyUploadProps {}
+export interface FancyUploadProps {
+  onUpload: (file: File) => void;
+}
 
-export function FancyUpload({}: FancyUploadProps) {
+export function FancyUpload(props: FancyUploadProps) {
   const {
     fileRef,
     onChooseFile,
@@ -41,7 +43,7 @@ export function FancyUpload({}: FancyUploadProps) {
     onResetFile,
     status,
     onUpload,
-  } = useFancyUpload();
+  } = useFancyUpload(props);
 
   if (status === "choose-file")
     return (
@@ -102,5 +104,5 @@ export function FancyUpload({}: FancyUploadProps) {
     );
   }
 
-  return <Box></Box>
+  return <Box></Box>;
 }
