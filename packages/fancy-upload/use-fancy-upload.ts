@@ -2,7 +2,7 @@ import React, { ChangeEventHandler } from "react";
 
 export const useFancyUpload = () => {
   const fileRef = React.useRef<HTMLInputElement>(null);
-  const [files, setFiles] = React.useState<FileList>();
+  const [files, setFiles] = React.useState<FileList | null>(null);
 
   const onChooseFile = () => {
     if (!fileRef?.current) return;
@@ -16,5 +16,13 @@ export const useFancyUpload = () => {
     setFiles(e.target.files);
   };
 
-  return { fileRef, onChooseFile, onFileChange, files };
+  const onResetFile = () => {
+    setFiles(null);
+
+    if (!fileRef.current) return;
+
+    fileRef.current.value = "";
+  };
+
+  return { fileRef, onChooseFile, onFileChange, files, onResetFile };
 };

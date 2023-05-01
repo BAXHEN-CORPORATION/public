@@ -14,7 +14,8 @@ import { useFancyUpload } from "./use-fancy-upload";
 export interface FancyUploadProps {}
 
 export function FancyUpload({}: FancyUploadProps) {
-  const { fileRef, onChooseFile, files, onFileChange } = useFancyUpload();
+  const { fileRef, onChooseFile, files, onFileChange, onResetFile } =
+    useFancyUpload();
 
   return (
     <Box minWidth="768px">
@@ -36,7 +37,7 @@ export function FancyUpload({}: FancyUploadProps) {
         <Box>
           <InsertDriveFileIcon />
           <Typography>{files[0].name}</Typography>
-          <IconButton>
+          <IconButton onClick={onResetFile}>
             <CloseIcon />
           </IconButton>
           <Button>Upload</Button>
