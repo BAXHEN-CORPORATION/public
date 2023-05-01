@@ -75,9 +75,35 @@ describe("FancyUpload", () => {
     expect(closeIcon).toBeTruthy();
     expect(rendered).toBeTruthy();
   });
-  it.todo(
-    "should remove the file and the upload button when the files's remove icon is clicked, and show choose file button"
-  );
+  it("should remove the file and the upload button when the files's remove icon is clicked, and show choose file button", async () => {
+    const { queryByText, getByTestId, queryByTestId } = render(
+      <BasicFancyUpload />
+    );
+
+    const input = getByTestId("file");
+
+    await waitFor(() =>
+      fireEvent.change(input, {
+        target: { files: [file] },
+      })
+    );
+
+    let closeIcon = queryByTestId("CloseIcon");
+
+    expect(closeIcon).toBeTruthy();
+
+    await waitFor(() => fireEvent.click(closeIcon as HTMLElement));
+
+    const fileIcon = queryByTestId("InsertDriveFileIcon");
+    closeIcon = queryByTestId("CloseIcon");
+    const rendered = queryByText(file.name);
+    const uploadButton = queryByText("Upload");
+
+    expect(uploadButton).toBeNull();
+    expect(fileIcon).toBeNull();
+    expect(closeIcon).toBeNull();
+    expect(rendered).toBeNull();
+  });
   it.todo(
     "should show a upload button choosing a file which when clicked call the upload callback passing the selected files"
   );
