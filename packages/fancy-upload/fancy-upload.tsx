@@ -10,39 +10,95 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 
 import { useFancyUpload } from "./use-fancy-upload";
+import { LinearProgressProps } from "@mui/material/LinearProgress";
+import LinearProgress from "@mui/material/LinearProgress";
+
+function LinearProgressWithLabel(
+  props: LinearProgressProps & { value: number }
+) {
+  return (
+    <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ width: "100%", mr: 1 }}>
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box sx={{ minWidth: 35 }}>
+        <Typography variant="body2" color="text.secondary">{`${Math.round(
+          props.value
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
 
 export interface FancyUploadProps {}
 
 export function FancyUpload({}: FancyUploadProps) {
-  const { fileRef, onChooseFile, files, onFileChange, onResetFile } =
-    useFancyUpload();
+  const {
+    fileRef,
+    onChooseFile,
+    files,
+    onFileChange,
+    onResetFile,
+    status,
+    onUpload,
+  } = useFancyUpload();
 
-  return (
-    <Box minWidth="768px">
-      <CloudUploadIcon />
+  if (status === "choose-file")
+    return (
+      <Box minWidth="768px">
+        <CloudUploadIcon />
 
-      <Typography>Upload a File</Typography>
-      <Typography>Select a file to upload from your computer</Typography>
+        <Typography>Upload a File</Typography>
+        <Typography>Select a file to upload from your computer</Typography>
+        <Button onClick={onChooseFile}>Choose File</Button>
+        <input
+          type="file"
+          data-testid="file"
+          ref={fileRef}
+          hidden
+          onChange={onFileChange}
+        />
+      </Box>
+    );
 
-      {!files && <Button onClick={onChooseFile}>Choose File</Button>}
-      <input
-        type="file"
-        data-testid="file"
-        ref={fileRef}
-        hidden
-        onChange={onFileChange}
-      />
+  if (status === "selected-file" && files)
+    return (
+      <Box minWidth="768px">
+        <CloudUploadIcon />
 
-      {files && (
-        <Box>
-          <InsertDriveFileIcon />
-          <Typography>{files[0].name}</Typography>
-          <IconButton onClick={onResetFile}>
-            <CloseIcon />
-          </IconButton>
-          <Button>Upload</Button>
-        </Box>
-      )}
-    </Box>
-  );
+        <Typography>Upload a File</Typography>
+        <Typography>Select a file to upload from your computer</Typography>
+
+        <input
+          type="file"
+          data-testid="file"
+          ref={fileRef}
+          hidden
+          onChange={onFileChange}
+        />
+
+        {status === "selected-file" && files && (
+          <Box>
+            <InsertDriveFileIcon />
+            <Typography>{files[0].name}</Typography>
+            <IconButton onClick={onResetFile}>
+              <CloseIcon />
+            </IconButton>
+            <Button onClick={onUpload}>Upload</Button>
+          </Box>
+        )}
+      </Box>
+    );
+
+  if (status === "uploading") {
+    return (
+      <Box minWidth="768px">
+        <CloudUploadIcon />
+
+        <Typography>Uploading...</Typography>
+        <Typography>Just give us a moment to process your file.</Typography>
+        <LinearProgressWithLabel data-testid="progress-bar" value={20} />
+      </Box>
+    );
+  }
 }

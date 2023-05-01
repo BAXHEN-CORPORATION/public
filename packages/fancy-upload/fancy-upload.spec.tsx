@@ -121,8 +121,10 @@ describe("FancyUpload", () => {
     await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
 
     const title = getByText("Uploading...");
-    const description = getByText(/Just give us a moment/);
-    const progressBar = getByTestId("progess-bar");
+    const description = getByText(
+      "Just give us a moment to process your file."
+    );
+    const progressBar = getByTestId("progress-bar");
 
     expect(title).toBeTruthy();
     expect(description).toBeTruthy();
