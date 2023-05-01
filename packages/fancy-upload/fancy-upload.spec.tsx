@@ -8,4 +8,10 @@ describe("FancyUpload", () => {
     const rendered = getByText("Upload a File");
     expect(rendered).toBeTruthy();
   });
+
+  it("should render with the correct default upload icon", () => {
+    const { getByTestId } = render(<BasicFancyUpload />);
+    const rendered = getByTestId("CloudUploadIcon");
+    expect(rendered).toBeTruthy();
+  });
 });
