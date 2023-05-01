@@ -54,7 +54,7 @@ describe("FancyUpload", () => {
     // expect(input.files?.[0].name).toBe("chucknorris.png");
     // expect(input.files?.length).toBe(1);
   });
-  it("should show the filename, remove icon and the default icon after choosing a file", async () => {
+  it("should show the filename, remove icon, the default icon and the upload button after choosing a file", async () => {
     const { getByText, getByTestId } = render(<BasicFancyUpload />);
 
     const input = getByTestId("file");
@@ -68,13 +68,15 @@ describe("FancyUpload", () => {
     const fileIcon = getByTestId("InsertDriveFileIcon");
     const closeIcon = getByTestId("CloseIcon");
     const rendered = getByText(file.name);
+    const uploadButton = getByText("Upload");
 
+    expect(uploadButton).toBeTruthy();
     expect(fileIcon).toBeTruthy();
     expect(closeIcon).toBeTruthy();
     expect(rendered).toBeTruthy();
   });
   it.todo(
-    "should show a cancel icon after choosing a file which when clicked remove the selected file"
+    "should remove the file and the upload button when the files's remove icon is clicked, and show choose file button"
   );
   it.todo(
     "should show a upload button choosing a file which when clicked call the upload callback passing the selected files"

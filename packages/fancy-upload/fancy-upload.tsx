@@ -39,6 +39,7 @@ export function FancyUpload({}: FancyUploadProps) {
           <IconButton>
             <CloseIcon />
           </IconButton>
+          <Button>Upload</Button>
         </Box>
       )}
     </Box>
