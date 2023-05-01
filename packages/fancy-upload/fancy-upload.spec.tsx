@@ -169,27 +169,34 @@ describe("FancyUpload", () => {
   });
 
   it("should show success default title, description and actions after uploading with success", async () => {
-    // const mockFn = jest.fn(callbackSuccess);
-    // const { getByText, getByTestId } = render(
-    //   <BasicFancyUpload onUpload={mockFn} />
-    // );
-    // const input = getByTestId("file");
-    // await waitFor(() =>
-    //   fireEvent.change(input, {
-    //     target: { files: [file] },
-    //   })
-    // );
-    // const uploadButton = getByText("Upload");
-    // await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
-    // const title = getByText("Upload Successful!");
-    // const description = getByText(
-    //   "Your file has been uploaded. You can copy the link to your clipboard."
-    // );
-    // const copyAction = getByText("Copy Link");
-    // const doneAction = getByText("Done");
-    // expect(copyAction).toBeTruthy();
-    // expect(doneAction).toBeTruthy();
-    // expect(title).toBeTruthy();
-    // expect(description).toBeTruthy();
+    const mockFn = jest.fn(callbackSuccess);
+    const { getByText, getByTestId } = render(
+      <BasicFancyUpload onUpload={mockFn} />
+    );
+
+    const input = getByTestId("file");
+
+    await waitFor(() =>
+      fireEvent.change(input, {
+        target: { files: [file] },
+      })
+    );
+
+    const uploadButton = getByText("Upload");
+
+    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
+
+    const title = getByText("Upload Successful!");
+    const description = getByText(
+      "Your file has been uploaded. You can copy the link to your clipboard."
+    );
+
+    const copyAction = getByText("Copy Link");
+    const doneAction = getByText("Done");
+
+    expect(copyAction).toBeTruthy();
+    expect(doneAction).toBeTruthy();
+    expect(title).toBeTruthy();
+    expect(description).toBeTruthy();
   });
 });
