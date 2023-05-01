@@ -101,4 +101,6 @@ export function FancyUpload({}: FancyUploadProps) {
       </Box>
     );
   }
+
+  return <Box></Box>
 }

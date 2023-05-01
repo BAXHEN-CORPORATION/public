@@ -130,4 +130,26 @@ describe("FancyUpload", () => {
     expect(description).toBeTruthy();
     expect(progressBar).toBeTruthy();
   });
+  it("should call the upload callback when upload button is clicked passing the file as fisrt argument", async () => {
+    const callback = jest.fn((file: File) => {});
+
+    const { getByText, getByTestId } = render(
+      <BasicFancyUpload onUpload={callback} />
+    );
+
+    const input = getByTestId("file");
+
+    await waitFor(() =>
+      fireEvent.change(input, {
+        target: { files: [file] },
+      })
+    );
+
+    const uploadButton = getByText("Upload");
+
+    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
+
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback.arguments[0]).toBe(file);
+  });
 });
