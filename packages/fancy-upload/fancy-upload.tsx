@@ -3,6 +3,8 @@ import React, { ReactNode } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import CloseIcon from "@mui/icons-material/Close";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -111,18 +113,22 @@ export function FancyUpload(props: FancyUploadProps) {
   if (status === "error") {
     return (
       <Box minWidth="768px">
-        <CloudUploadIcon />
+        <HighlightOffIcon />
 
-        <Typography>{status}</Typography>
-        <Typography>Just give us a moment to process your file.</Typography>
-        <LinearProgressWithLabel data-testid="progress-bar" value={progress} />
+        <Typography>Oops!</Typography>
+        <Typography>
+          Your file could not be uploaded due to an error. Try uploading it
+          again?
+        </Typography>
+        <Button>Retry</Button>
+        <Button onClick={onResetFile}>Cancel</Button>
       </Box>
     );
   }
   if (status === "success") {
     return (
       <Box minWidth="768px">
-        <CloudUploadIcon />
+        <CheckCircleOutlineIcon />
 
         <Typography>Upload Successful!</Typography>
         <Typography>

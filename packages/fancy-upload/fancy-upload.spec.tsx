@@ -221,7 +221,7 @@ describe("FancyUpload", () => {
 
     await waitFor(async () => findByText("Oops!"));
 
-    const title = getByText("Oops");
+    const title = getByText("Oops!");
     const description = getByText(
       "Your file could not be uploaded due to an error. Try uploading it again?"
     );
