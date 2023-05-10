@@ -18,6 +18,7 @@ export const useFancyUpload = ({
   const fileRef = React.useRef<HTMLInputElement>(null);
   const [files, setFiles] = React.useState<FileList | null>(null);
   const [status, setStatus] = React.useState<FancyUploadStatus>("choose-file");
+  const [copy, setCopy] = React.useState(false);
 
   const onChooseFile = () => {
     if (!fileRef?.current) return;
@@ -56,6 +57,8 @@ export const useFancyUpload = ({
 
   const onLinkCopy = () => {
     onCopy();
+    setCopy(true);
+    setTimeout(() => setCopy(false), 1000);
   };
   return {
     fileRef,
@@ -68,5 +71,6 @@ export const useFancyUpload = ({
     progress,
     onUploadDone,
     onLinkCopy,
+    copy,
   };
 };

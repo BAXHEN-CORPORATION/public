@@ -1,361 +1,352 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { BasicFancyUpload } from "./fancy-upload.composition";
-import { RenderResult } from "@testing-library/react";
 import { act } from "@testing-library/react";
+import {
+  FancyUploadProps,
+  OnUploadFuntion,
+  UpadateStatusFunction,
+} from "./fancy-upload";
+
+type CallbackKeys = "upload" | "upload-success" | "upload-error";
+
+type Actions =
+  | "upload-file"
+  | "cancel"
+  | "remove"
+  | "copy"
+  | "retry"
+  | "done"
+  | CallbackKeys;
+type PropsMockKeys = keyof Omit<FancyUploadProps, "progress">;
+type Callbacks = { [key in CallbackKeys]: OnUploadFuntion };
+
+const filename = "chucknorris.png";
+
+const initialStateExpectations = [
+  {
+    getter: "getByText",
+    query: /Upload a File/,
+    expector: "toBeTruthy",
+  },
+  {
+    getter: "getByText",
+    query: /Select a file to upload/,
+    expector: "toBeTruthy",
+  },
+  {
+    getter: "getByText",
+    query: "Choose File",
+    expector: "toBeTruthy",
+  },
+  {
+    getter: "getByTestId",
+    query: "CloudUploadIcon",
+    expector: "toBeTruthy",
+  },
+];
+
+const tests = [
+  {
+    assertion:
+      "show the default title, description, icon and choose file button",
+    expectations: initialStateExpectations,
+  },
+  {
+    assertion:
+      "show the filename, remove icon, the default icon, the upload button and hide the choose file button after choosing a file",
+    actions: ["upload-file"] as Actions[],
+    expectations: [
+      {
+        getter: "getByTestId",
+        query: "InsertDriveFileIcon",
+        expector: "toBeTruthy",
+      },
+      { getter: "getByTestId", query: "CloseIcon", expector: "toBeTruthy" },
+      { getter: "getByText", query: filename, expector: "toBeTruthy" },
+      { getter: "getByText", query: "Upload", expector: "toBeTruthy" },
+      { getter: "queryByText", query: /Choose File/, expector: "toBeNull" },
+    ],
+  },
+
+  {
+    assertion:
+      "show the filename, remove icon, the default icon and the upload button after choosing a file",
+    actions: ["upload-file", "remove"] as Actions[],
+    expectations: [
+      {
+        getter: "queryByTestId",
+        query: "InsertDriveFileIcon",
+        expector: "toBeNull",
+      },
+      { getter: "queryByTestId", query: "CloseIcon", expector: "toBeNull" },
+      { getter: "queryByText", query: filename, expector: "toBeNull" },
+      { getter: "queryByText", query: "Upload", expector: "toBeNull" },
+    ],
+  },
+  {
+    assertion:
+      "start the uploading after upload button is clicked, show the default uploading label, default description and progress bar",
+    actions: ["upload-file", "upload"] as Actions[],
+    action: "upload" as CallbackKeys,
+    expectations: [
+      {
+        getter: "getByText",
+        query: "Uploading...",
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "getByText",
+        query: /Just give us a moment/,
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "queryByTestId",
+        query: "progress-bar",
+        expector: "toBeTruthy",
+      },
+    ],
+  },
+  {
+    assertion:
+      "show success default title, description and actions after uploading with success",
+    actions: ["upload-file", "upload"] as Actions[],
+    action: "upload-success" as CallbackKeys,
+    waitForConfig: {
+      action: "upload-success" as Actions,
+      getter: "findByText",
+      query: "Upload Successful!",
+    },
+    expectations: [
+      {
+        getter: "getByText",
+        query: "Upload Successful!",
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "getByText",
+        query: /Your file has been uploaded./,
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "getByText",
+        query: "Copy Link",
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "getByText",
+        query: "Done",
+        expector: "toBeTruthy",
+      },
+    ],
+  },
+  {
+    assertion:
+      "show the default copied label after clicking on copy button and call onCopy callback",
+    actions: ["upload-file", "upload", "copy"] as Actions[],
+    action: "upload-success" as CallbackKeys,
+    waitForConfig: {
+      action: "upload-success" as Actions,
+      getter: "findByText",
+      query: "Upload Successful!",
+    },
+    expectations: [
+      {
+        getter: "getByText",
+        query: "Copied!",
+        expector: "toBeTruthy",
+      },
+    ],
+    mocksExpectations: [{ mock: "onCopy" as PropsMockKeys, length: 1 }],
+  },
+  {
+    assertion:
+      "show the info before chosing a file after on done button and call onDone callback",
+    actions: ["upload-file", "upload", "done"] as Actions[],
+    action: "upload-success" as CallbackKeys,
+    waitForConfig: {
+      action: "upload-success" as Actions,
+      getter: "findByText",
+      query: "Upload Successful!",
+    },
+    expectations: initialStateExpectations,
+    mocksExpectations: [{ mock: "onDone" as PropsMockKeys, length: 1 }],
+  },
+  {
+    assertion:
+      "call the upload callback again when the retry button is clicked and retry the upload",
+    actions: ["upload-file", "upload"] as Actions[],
+    action: "upload-error" as CallbackKeys,
+    waitForConfig: {
+      action: "upload-error" as Actions,
+      getter: "findByText",
+      query: "Oops!",
+    },
+    expectations: [
+      {
+        getter: "getByText",
+        query: "Oops!",
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "getByText",
+        query: /Your file could not be uploaded/,
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "getByText",
+        query: "Retry",
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "getByText",
+        query: "Cancel",
+        expector: "toBeTruthy",
+      },
+    ],
+  },
+  {
+    assertion:
+      "show error default title, description and actions after uploading with error",
+    actions: ["upload-file", "upload", "retry"] as Actions[],
+    action: "upload-error" as CallbackKeys,
+    waitForConfig: {
+      action: "upload-error" as Actions,
+      getter: "findByText",
+      query: "Oops!",
+    },
+    expectations: [
+      {
+        getter: "getByText",
+        query: "Oops!",
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "getByText",
+        query: /Your file could not be uploaded/,
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "getByText",
+        query: "Retry",
+        expector: "toBeTruthy",
+      },
+      {
+        getter: "getByText",
+        query: "Cancel",
+        expector: "toBeTruthy",
+      },
+    ],
+    mocksExpectations: [{ mock: "onUpload" as PropsMockKeys, length: 2 }],
+  },
+  {
+    assertion:
+      "show the title, description and button to upload after clicking cancel on error state",
+    actions: ["upload-file", "upload", "cancel"] as Actions[],
+    action: "upload-error" as CallbackKeys,
+    waitForConfig: {
+      action: "upload-error" as Actions,
+      getter: "findByText",
+      query: "Oops!",
+    },
+    expectations: initialStateExpectations,
+  },
+];
+const file = new File(["(⌐□_□)"], filename, { type: "image/png" });
+const callbacks: Callbacks = {
+  "upload-error"(file, updateStatus) {
+    updateStatus("error");
+  },
+  upload() {},
+  "upload-success"(file, updateStatus) {
+    updateStatus("success");
+  },
+};
 
 describe("FancyUpload", () => {
-  let file: File;
+  tests.forEach((test) => {
+    const {
+      assertion,
+      expectations,
+      action,
+      actions,
+      waitForConfig,
+      mocksExpectations,
+    } = test;
 
-  const callbackSuccess = (file: File, updateStatus) => {
-    setTimeout(() => {
-      updateStatus("success");
-    }, 1000);
-  };
-  const callbackError = (file: File, updateStatus) => {
-    setTimeout(() => {
-      updateStatus("error");
-    }, 1000);
-  };
+    const callback = callbacks[action || "upload-success"];
 
-  beforeEach(() => {
-    file = new File(["(⌐□_□)"], "chucknorris.png", { type: "image/png" });
-  });
+    it(`should ${assertion}`, async () => {
+      const props = {
+        onUpload: jest.fn(callback),
+        onCopy: jest.fn(() => {}),
+        onDone: jest.fn(() => {}),
+      };
 
-  it("should render with the correct default title", () => {
-    const { getByText } = render(<BasicFancyUpload />);
-    const rendered = getByText("Upload a File");
-    expect(rendered).toBeTruthy();
-  });
+      const screen = render(<BasicFancyUpload {...props} />);
 
-  it("should render with the correct default upload icon", () => {
-    const { getByTestId } = render(<BasicFancyUpload />);
-    const rendered = getByTestId("CloudUploadIcon");
-    expect(rendered).toBeTruthy();
-  });
+      const { getByTestId, queryByTestId, getByText } = screen;
 
-  it("should render with the correct default description", () => {
-    const { getByText } = render(<BasicFancyUpload />);
-    const rendered = getByText(/Select a file/);
-    expect(rendered).toBeTruthy();
-  });
+      if (actions?.includes("upload-file")) {
+        const input = getByTestId("file");
 
-  it("should render a choose file button with the correct default label", () => {
-    const { getByText } = render(<BasicFancyUpload />);
-    const rendered = getByText(/Choose File/);
-    expect(rendered).toBeTruthy();
-  });
+        await waitFor(() =>
+          fireEvent.change(input, {
+            target: { files: [file] },
+          })
+        );
+      }
 
-  it("should hide the choose file button after choosing a file", async () => {
-    const { queryByText, getByTestId } = render(<BasicFancyUpload />);
+      if (actions?.includes("remove")) {
+        const closeIcon = queryByTestId("CloseIcon");
 
-    const input = getByTestId("file");
+        expect(closeIcon).toBeTruthy();
 
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
+        await waitFor(() => fireEvent.click(closeIcon as HTMLElement));
+      }
+      if (actions?.includes("upload")) {
+        const button = getByText("Upload");
 
-    expect(queryByText(/Choose File/)).toBeNull();
-  });
-  it("should show the filename, remove icon, the default icon and the upload button after choosing a file", async () => {
-    const { getByText, getByTestId } = render(<BasicFancyUpload />);
+        await waitFor(() => fireEvent.click(button as HTMLElement));
+      }
 
-    const input = getByTestId("file");
+      if (waitForConfig?.action) {
+        const { getter, query } = waitForConfig;
 
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
+        await waitFor(async () => {
+          await screen[getter](query);
+        });
+      }
 
-    const fileIcon = getByTestId("InsertDriveFileIcon");
-    const closeIcon = getByTestId("CloseIcon");
-    const rendered = getByText(file.name);
-    const uploadButton = getByText("Upload");
+      if (actions?.includes("copy")) {
+        const button = getByText("Copy Link");
 
-    expect(uploadButton).toBeTruthy();
-    expect(fileIcon).toBeTruthy();
-    expect(closeIcon).toBeTruthy();
-    expect(rendered).toBeTruthy();
-  });
-  it("should remove the file and the upload button when the files's remove icon is clicked, and show choose file button", async () => {
-    const { queryByText, getByTestId, queryByTestId } = render(
-      <BasicFancyUpload />
-    );
+        await waitFor(() => fireEvent.click(button as HTMLElement));
+      }
 
-    const input = getByTestId("file");
+      if (actions?.includes("done")) {
+        const button = getByText("Done");
 
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
+        await waitFor(() => fireEvent.click(button as HTMLElement));
+      }
+      if (actions?.includes("retry")) {
+        const button = getByText("Retry");
 
-    let closeIcon = queryByTestId("CloseIcon");
+        await waitFor(() => fireEvent.click(button as HTMLElement));
+      }
+      if (actions?.includes("cancel")) {
+        const button = getByText("Cancel");
 
-    expect(closeIcon).toBeTruthy();
+        await waitFor(() => fireEvent.click(button as HTMLElement));
+      }
 
-    await waitFor(() => fireEvent.click(closeIcon as HTMLElement));
+      expectations.forEach(({ query, getter, expector }) => {
+        expect(screen[getter](query))[expector]();
+      });
 
-    const fileIcon = queryByTestId("InsertDriveFileIcon");
-    closeIcon = queryByTestId("CloseIcon");
-    const rendered = queryByText(file.name);
-    const uploadButton = queryByText("Upload");
-
-    expect(uploadButton).toBeNull();
-    expect(fileIcon).toBeNull();
-    expect(closeIcon).toBeNull();
-    expect(rendered).toBeNull();
-  });
-
-  it("should start the uploading after upload button is clicked, show the default uploading label, default description and progress bar", async () => {
-    const mockFn = jest.fn(callbackSuccess);
-    const { getByText, getByTestId, findByText } = render(
-      <BasicFancyUpload onUpload={mockFn} />
-    );
-
-    const input = getByTestId("file");
-
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
-
-    const uploadButton = getByText("Upload");
-
-    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
-
-    const title = getByText("Uploading...");
-    const description = getByText(
-      "Just give us a moment to process your file."
-    );
-    const progressBar = getByTestId("progress-bar");
-
-    expect(title).toBeTruthy();
-    expect(description).toBeTruthy();
-    expect(progressBar).toBeTruthy();
-
-    await waitFor(async () => findByText("Upload Successful!"));
-  });
-
-  it("should call the upload callback when upload button is clicked passing the file as fisrt argument and the callback to update the status as second argument", async () => {
-    const mockFn = jest.fn(callbackSuccess);
-    const { getByText, getByTestId, findByText } = render(
-      <BasicFancyUpload onUpload={mockFn} />
-    );
-
-    const input = getByTestId("file");
-
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
-
-    const uploadButton = getByText("Upload");
-
-    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
-    await waitFor(() => findByText("Upload Successful!"));
-
-    expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn.mock.calls[0][0]).toBe(file);
-    expect(typeof mockFn.mock.calls[0][1]).toBe("function");
-  });
-
-  it("should show success default title, description and actions after uploading with success", async () => {
-    const mockFn = jest.fn(callbackSuccess);
-    const { getByText, getByTestId, findByText } = render(
-      <BasicFancyUpload onUpload={mockFn} />
-    );
-
-    const input = getByTestId("file");
-
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
-
-    const uploadButton = getByText("Upload");
-
-    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
-
-    await waitFor(async () => findByText("Upload Successful!"));
-
-    const title = getByText("Upload Successful!");
-    const description = getByText(
-      "Your file has been uploaded. You can copy the link to your clipboard."
-    );
-
-    const copyAction = getByText("Copy Link");
-    const doneAction = getByText("Done");
-
-    expect(copyAction).toBeTruthy();
-    expect(doneAction).toBeTruthy();
-    expect(title).toBeTruthy();
-    expect(description).toBeTruthy();
-  });
-
-  it("should call the copy callback when clicked", async () => {
-    const mockFn = jest.fn(callbackSuccess);
-    const mockCopyFn = jest.fn(() => {});
-    const { getByText, getByTestId, findByText } = render(
-      <BasicFancyUpload onUpload={mockFn} onCopy={mockCopyFn} />
-    );
-
-    const input = getByTestId("file");
-
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
-
-    const uploadButton = getByText("Upload");
-
-    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
-
-    await waitFor(async () => findByText("Upload Successful!"));
-
-    const copyAction = getByText("Copy Link");
-
-    copyAction.click();
-
-    expect(mockCopyFn.mock.calls.length).toBe(1);
-  });
-  it("should call the done callback when clicked and show title, description and button to choose a file", async () => {
-    const mockFn = jest.fn(callbackSuccess);
-    const mockDoneFn = jest.fn(() => {});
-    const { getByText, getByTestId, findByText } = render(
-      <BasicFancyUpload onUpload={mockFn} onDone={mockDoneFn} />
-    );
-
-    const input = getByTestId("file");
-
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
-
-    const uploadButton = getByText("Upload");
-
-    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
-
-    await waitFor(async () => findByText("Upload Successful!"));
-
-    const doneAction = getByText("Done");
-
-    act(() => {
-      doneAction.click();
+      mocksExpectations?.forEach(({ mock, length }) => {
+        expect(props[mock].mock.calls.length).toBe(length);
+      });
     });
-
-    await waitFor(async () => findByText("Choose File"));
-
-    const title = getByText(/Choose File/);
-    const description = getByText("Select a file to upload from your computer");
-
-    expect(title).toBeTruthy();
-    expect(description).toBeTruthy();
-
-    expect(mockDoneFn.mock.calls.length).toBe(1);
-  });
-
-  it("should show error default title, description and actions after uploading with error", async () => {
-    const mockFn = jest.fn(callbackError);
-    const { getByText, getByTestId, findByText } = render(
-      <BasicFancyUpload onUpload={mockFn} />
-    );
-
-    const input = getByTestId("file");
-
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
-
-    const uploadButton = getByText("Upload");
-
-    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
-
-    await waitFor(async () => findByText("Oops!"));
-
-    const title = getByText("Oops!");
-    const description = getByText(
-      "Your file could not be uploaded due to an error. Try uploading it again?"
-    );
-
-    const retryAction = getByText("Retry");
-    const cancelAction = getByText("Cancel");
-
-    expect(retryAction).toBeTruthy();
-    expect(cancelAction).toBeTruthy();
-    expect(title).toBeTruthy();
-    expect(description).toBeTruthy();
-  });
-
-  it("should call the upload callback again when the retry button is clicked", async () => {
-    const mockFn = jest.fn(callbackError);
-    const { getByText, getByTestId, findByText } = render(
-      <BasicFancyUpload onUpload={mockFn} />
-    );
-
-    const input = getByTestId("file");
-
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
-
-    const uploadButton = getByText("Upload");
-
-    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
-
-    await waitFor(async () => findByText("Oops!"));
-
-    const retryAction = getByText("Retry");
-
-    retryAction.click();
-
-    expect(mockFn.mock.calls.length).toBe(2);
-  });
-  it("should call the done callback when clicked", async () => {
-    const mockFn = jest.fn(callbackError);
-    const { getByText, getByTestId, findByText } = render(
-      <BasicFancyUpload onUpload={mockFn} />
-    );
-
-    const input = getByTestId("file");
-
-    await waitFor(() =>
-      fireEvent.change(input, {
-        target: { files: [file] },
-      })
-    );
-
-    const uploadButton = getByText("Upload");
-
-    await waitFor(() => fireEvent.click(uploadButton as HTMLElement));
-
-    await waitFor(async () => findByText("Oops!"));
-
-    const action = getByText("Cancel");
-
-    action.click();
-
-    await waitFor(async () => findByText("Choose File"));
-
-    const title = getByText(/Choose File/);
-    const description = getByText("Select a file to upload from your computer");
-
-    expect(title).toBeTruthy();
-    expect(description).toBeTruthy();
-
-    expect(mockFn.mock.calls.length).toBe(1);
   });
 });

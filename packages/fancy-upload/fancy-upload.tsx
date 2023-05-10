@@ -32,11 +32,13 @@ function LinearProgressWithLabel(
   );
 }
 
+export type UpadateStatusFunction = (status: FancyUploadCallbackStatus) => void;
+export type OnUploadFuntion = (
+  file: File,
+  updateStatus: UpadateStatusFunction
+) => void;
 export interface FancyUploadProps {
-  onUpload: (
-    file: File,
-    updateStatus: (status: FancyUploadCallbackStatus) => void
-  ) => void;
+  onUpload: OnUploadFuntion;
   progress: number;
   onDone?: () => void;
   onCopy: () => void;
@@ -54,6 +56,7 @@ export function FancyUpload(props: FancyUploadProps) {
     progress,
     onUploadDone,
     onLinkCopy,
+    copy,
   } = useFancyUpload(props);
 
   if (status === "choose-file")
@@ -138,7 +141,9 @@ export function FancyUpload(props: FancyUploadProps) {
         <Typography>
           Your file has been uploaded. You can copy the link to your clipboard.
         </Typography>
-        <Button onClick={onLinkCopy}>Copy Link</Button>
+        <Button onClick={onLinkCopy} disabled={copy}>
+          {copy ? "Copied!" : "Copy Link"}
+        </Button>
         <Button onClick={onUploadDone}>Done</Button>
       </Box>
     );
