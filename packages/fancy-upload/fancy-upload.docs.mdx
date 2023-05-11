@@ -1,18 +1,34 @@
 ---
-description: A FancyUpload component.
+description: A fancy upload component with animation, progress, success and error state
+labels: ["Material UI v5", "React", "MUI 5", "TDD", "TRUTH-TABLES"]
 ---
 
-import { FancyUpload } from './fancy-upload';
+import { FancyUpload } from "./fancy-upload";
 
-A component that does something special and renders text in a div.
+A component to go throut the flow of uploading a single file display the task progress and error or success state
 
 ### Component usage
+
 ```js
-<FancyUpload>Hello world!</FancyUpload>
+<FancyUpload
+  onUpload={() => {}}
+  onDone={() => {}}
+  onCopy={() => {}}
+  progress={0}
+/>
 ```
 
 ### Render hello world!
 
 ```js live
-<FancyUpload>Hello world!</FancyUpload>
+<div style={{ backgroundColor: "gray", padding: "2rem" }}>
+  <FancyUpload
+    onUpload={(file, updateStatus) => {
+      updateStatus("success");
+    }}
+    onDone={() => {}}
+    onCopy={() => {}}
+    progress={50}
+  />
+</div>
 ```

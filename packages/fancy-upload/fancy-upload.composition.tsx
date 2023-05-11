@@ -7,6 +7,7 @@ export const BasicFancyUpload = (args: Partial<FancyUploadProps>) => {
 
   const onUpload: FancyUploadProps["onUpload"] = async (file, updateStatus) => {
     return new Promise((resolve) => {
+      setProgress(1);
       const timerId = setInterval(() => {
         setProgress((old) => {
           if (old < 100) {
@@ -37,6 +38,7 @@ export const ErrorFancyUpload = (args: Partial<FancyUploadProps>) => {
   const [progress, setProgress] = React.useState(1);
 
   const onUpload: FancyUploadProps["onUpload"] = async (file, updateStatus) => {
+    setProgress(1);
     return new Promise((resolve) => {
       const timerId = setInterval(() => {
         setProgress((old) => {

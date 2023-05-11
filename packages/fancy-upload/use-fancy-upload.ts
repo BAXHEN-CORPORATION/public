@@ -12,7 +12,7 @@ export type FancyUploadStatus =
 export const useFancyUpload = ({
   onUpload,
   onDone,
-  progress,
+  progress = 0,
   onCopy,
 }: FancyUploadProps) => {
   const fileRef = React.useRef<HTMLInputElement>(null);

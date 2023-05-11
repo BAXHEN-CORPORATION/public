@@ -21,14 +21,23 @@ function LinearProgressWithLabel(
   props: LinearProgressProps & { value: number }
 ) {
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "end",
+      }}
+    >
+      <Box sx={{ minWidth: 35 }}>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          fontWeight={700}
+        >{`${Math.round(props.value)}%`}</Typography>
+      </Box>
       <Box sx={{ width: "100%", mr: 1 }}>
         <LinearProgress variant="determinate" {...props} />
-      </Box>
-      <Box sx={{ minWidth: 35 }}>
-        <Typography variant="body2" color="text.secondary">{`${Math.round(
-          props.value
-        )}%`}</Typography>
       </Box>
     </Box>
   );
@@ -49,13 +58,25 @@ const fillIn = keyframes`
   }
 `;
 
+const fadeSlideIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(33%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const Root = styled("div")(() => ({
-  maxWidth: "30.5em",
-  padding: "2em 2em 1.875em 1.875em",
+  maxWidth: "549px",
+  width: "calc(100% - 48px)",
+  padding: "36px 33.75px",
   display: "flex",
-  gap: "1.875em",
+  gap: "2rem",
   backgroundColor: "white",
-  borderRadius: "1em",
+  borderRadius: "18px",
   "& > svg": {
     alignSelf: "center",
   },
@@ -64,31 +85,75 @@ const Root = styled("div")(() => ({
     animation: `${fillIn} 1s forwards`,
   },
 }));
+
 const Content = styled("div")(() => ({
   flex: 1,
   display: "flex",
   flexDirection: "column",
   textAlign: "start",
-  gap: "1.5em",
+  minHeight: "48px",
+  maxWidth: "405px",
+  width: "80%",
+
+  "& > *": {
+    animationName: fadeSlideIn,
+    animationDuration: "0.5s",
+    animationTimingFunction: "ease-in-out",
+    animationFillMode: "forwards",
+    opacity: 0,
+  },
 }));
 
 const Title = styled(Typography)(() => ({
-  fontSize: "1.25rem",
+  fontSize: "22.5px",
   fontWeigh: 500,
   color: "rgb(11,12,14)",
+  lineHeight: 1.2,
+  marginBottom: "27px",
 }));
 const Description = styled(Typography)(() => ({
-  fontSize: "1rem",
+  fontSize: "18px",
   color: "rgb(69,73,84)",
+  minHeight: "48px",
+  marginBottom: "27px",
 }));
 
 const ChooseFileButton = styled(Button)(() => ({
   border: "1px dashed rgba(115,122,140,0.4)",
   color: "rgb(11,12,14)",
-
-  "&:hover": {
+  textTransform: "capitalize",
+  height: "37px",
+  "&:hover, &:focus": {
     backgroundColor: "rgba(143,149,163,0.2)",
   },
+}));
+
+const ActionButton = styled(Button)(() => ({
+  padding: "9px 36px",
+  fontSize: "13.5px",
+  backgroundColor: "rgba(143, 149, 163, 0.2)",
+  color: "rgb(11,12,14)",
+  textTransform: "capitalize",
+  height: "37px",
+  "&:hover, &:focus": {
+    backgroundColor: "rgba(143,149,163,0.18)",
+  },
+}));
+
+const Actions = styled("div")(() => ({
+  display: "flex",
+  width: "100%",
+  alignItems: "center",
+}));
+
+const Filename = styled(Typography)(() => ({
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  fontWeight: 700,
+  lineHeight: "20.25px",
+  fontSize: "13.5px",
+  marginRight: "4.5px",
+  whiteSpace: "nowrap",
 }));
 
 export type UpadateStatusFunction = (status: FancyUploadCallbackStatus) => void;
@@ -98,10 +163,23 @@ export type OnUploadFuntion = (
 ) => void;
 
 export interface FancyUploadProps {
+  /**
+   * Callback to be called when the upload button is clicked passing the file as first arg and a setter to update the upload process state to success or error
+   */
   onUpload: OnUploadFuntion;
-  progress: number;
-  onDone?: () => void;
+  /**
+   * Callback that will run when the user clicks on Copy button
+   */
   onCopy: () => void;
+  /**
+   * Value to be passed to display the progresss of the upload action
+   */
+  progress?: number;
+
+  /**
+   * Callback that will run when the user clicks on Done button
+   */
+  onDone?: () => void;
 }
 
 export function FancyUpload(props: FancyUploadProps) {
@@ -119,13 +197,16 @@ export function FancyUpload(props: FancyUploadProps) {
     copy,
   } = useFancyUpload(props);
 
+  const iconSx = { fontSize: "48px", overflow: "visible" };
+
   if (status === "choose-file")
     return (
       <Root>
-        <CloudUploadIcon color="primary" fontSize="large" />
+        <CloudUploadIcon color="primary" sx={iconSx} />
         <Content>
           <Title>Upload a File</Title>
           <Description>Select a file to upload from your computer</Description>
+
           <ChooseFileButton onClick={onChooseFile}>
             Choose File
           </ChooseFileButton>
@@ -143,10 +224,10 @@ export function FancyUpload(props: FancyUploadProps) {
   if (status === "selected-file" && files)
     return (
       <Root>
-        <CloudUploadIcon color="primary" />
+        <CloudUploadIcon color="primary" sx={iconSx} />
         <Content>
           <Title>Upload a File</Title>
-          <Typography>Select a file to upload from your computer</Typography>
+          <Description>Select a file to upload from your computer</Description>
 
           <input
             type="file"
@@ -156,16 +237,24 @@ export function FancyUpload(props: FancyUploadProps) {
             onChange={onFileChange}
           />
 
-          {status === "selected-file" && files && (
-            <Box>
-              <InsertDriveFileIcon />
-              <Typography>{files[0].name}</Typography>
-              <IconButton onClick={onResetFile}>
-                <CloseIcon />
-              </IconButton>
-              <Button onClick={onUpload}>Upload</Button>
-            </Box>
-          )}
+          <Actions>
+            <InsertDriveFileIcon
+              color="disabled"
+              fontSize="large"
+              sx={{ mr: "13.5px" }}
+            />
+            <Filename>{files[0].name}</Filename>
+            <IconButton
+              onClick={onResetFile}
+              sx={{ padding: "3px", mr: "27px" }}
+            >
+              <CloseIcon
+                sx={{ fontSize: "16px" }}
+                htmlColor="rgb(92, 98, 112)"
+              />
+            </IconButton>
+            <ActionButton onClick={onUpload}>Upload</ActionButton>
+          </Actions>
         </Content>
       </Root>
     );
@@ -173,11 +262,11 @@ export function FancyUpload(props: FancyUploadProps) {
   if (status === "uploading") {
     return (
       <Root>
-        <CloudUploadIcon color="primary" />
+        <CloudUploadIcon color="primary" sx={iconSx} />
 
         <Content>
           <Title>Uploading...</Title>
-          <Typography>Just give us a moment to process your file.</Typography>
+          <Description>Just give us a moment to process your file.</Description>
           <LinearProgressWithLabel
             data-testid="progress-bar"
             value={progress}
@@ -189,15 +278,19 @@ export function FancyUpload(props: FancyUploadProps) {
   if (status === "error") {
     return (
       <Root>
-        <HighlightOffIcon />
+        <HighlightOffIcon color="error" sx={iconSx} />
         <Content>
           <Title>Oops!</Title>
-          <Typography>
+          <Description>
             Your file could not be uploaded due to an error. Try uploading it
             again?
-          </Typography>
-          <Button onClick={onUpload}>Retry</Button>
-          <Button onClick={onResetFile}>Cancel</Button>
+          </Description>
+          <Actions>
+            <ActionButton onClick={onUpload}>Retry</ActionButton>
+            <ActionButton onClick={onResetFile} sx={{ ml: "27px" }}>
+              Cancel
+            </ActionButton>
+          </Actions>
         </Content>
       </Root>
     );
@@ -205,18 +298,21 @@ export function FancyUpload(props: FancyUploadProps) {
   if (status === "success") {
     return (
       <Root>
+        <CheckCircleOutlineIcon color="success" sx={iconSx} />
         <Content>
-          <CheckCircleOutlineIcon />
-
           <Title>Upload Successful!</Title>
-          <Typography>
+          <Description>
             Your file has been uploaded. You can copy the link to your
             clipboard.
-          </Typography>
-          <Button onClick={onLinkCopy} disabled={copy}>
-            {copy ? "Copied!" : "Copy Link"}
-          </Button>
-          <Button onClick={onUploadDone}>Done</Button>
+          </Description>
+          <Actions>
+            <ActionButton onClick={onLinkCopy} disabled={copy}>
+              {copy ? "Copied!" : "Copy Link"}
+            </ActionButton>
+            <ActionButton onClick={onUploadDone} sx={{ ml: "27px" }}>
+              Done
+            </ActionButton>
+          </Actions>
         </Content>
       </Root>
     );
