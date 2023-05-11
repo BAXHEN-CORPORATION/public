@@ -28,16 +28,10 @@
         "rootDir": "packages/details"
     },
     "fancy-upload": {
-        "scope": "",
-        "version": "",
+        "scope": "baxhen.public",
+        "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "packages/fancy-upload",
-        "config": {
-            "teambit.react/react": {},
-            "teambit.envs/envs": {
-                "env": "teambit.react/react"
-            }
-        }
+        "rootDir": "packages/fancy-upload"
     },
     "flip-card": {
         "scope": "baxhen.public",

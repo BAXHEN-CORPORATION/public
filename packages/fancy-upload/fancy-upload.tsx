@@ -14,8 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import { FancyUploadCallbackStatus, useFancyUpload } from "./use-fancy-upload";
 import { LinearProgressProps } from "@mui/material/LinearProgress";
 import LinearProgress from "@mui/material/LinearProgress";
-import { styled } from "@mui/material/styles";
-import { keyframes } from "@mui/material";
+import { keyframes, styled } from "@mui/material";
 
 function LinearProgressWithLabel(
   props: LinearProgressProps & { value: number }
