@@ -1,5 +1,6 @@
 import React from "react";
 import { FancyUpload, FancyUploadProps } from "./fancy-upload";
+import Box from "@mui/material/Box";
 
 export const BasicFancyUpload = (args: Partial<FancyUploadProps>) => {
   const [progress, setProgress] = React.useState(1);
@@ -26,7 +27,11 @@ export const BasicFancyUpload = (args: Partial<FancyUploadProps>) => {
 
   const props: FancyUploadProps = { onUpload, progress, onCopy, ...args };
 
-  return <FancyUpload {...props} />;
+  return (
+    <Box p="2rem" bgcolor="green">
+      <FancyUpload {...props} />;
+    </Box>
+  );
 };
 export const ErrorFancyUpload = (args: Partial<FancyUploadProps>) => {
   const [progress, setProgress] = React.useState(1);
@@ -53,5 +58,9 @@ export const ErrorFancyUpload = (args: Partial<FancyUploadProps>) => {
 
   const props: FancyUploadProps = { onUpload, progress, onCopy, ...args };
 
-  return <FancyUpload {...props} />;
+  return (
+    <Box p="2rem" bgcolor="green">
+      <FancyUpload {...props} />;
+    </Box>
+  );
 };
